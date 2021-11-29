@@ -1,41 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Woongflix</title>
-
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <!-- css init -->
-    <link rel="stylesheet" href="/static/css/default.css" />
-    <!-- css custom -->
-    <link rel="stylesheet" href="/static/css/style.css" />
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <!-- custom script -->
-    <script src="/static/scripts/main.js"></script>
-
-</head>
-
-<body>
-    <header>
-
-        <img src="../static/images/logo.png" alt="logo" class="header-logo">
-
-        <h1>Woongflix</h1>
-
-    </header>
-
-    <main>
-
-
-        <div id="movie-recommend">
+{% extends "base.html" %}
+{% block main %}
+<div id="movie-recommend">
 
             <div class="movie-recommend-list">
                 <div class="movie-card-head"> </div>
@@ -44,10 +9,10 @@
                 <div class="movie-card-head"> </div>
             </div>
 
-        </div>
+</div>
 
 
-        <div class="feeling">
+<div class="feeling">
 
             <div class="headline">
                 <h1>오늘 <b>당신</b>의 기분은 어떠신가요?</h1>
@@ -65,61 +30,27 @@
             <div id="movie-list" style="display: none;">
 
                 <div class="movie-card">
-                    <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card"
+                    <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
                         onclick="showDetail()">
                 </div>
 
-                <!-- <div class="movie-card">
-
+                <div class="movie-card">
+                    <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
+                        onclick="showDetail()">
                 </div>
 
                 <div class="movie-card">
-
+                    <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
+                        onclick="showDetail()">
                 </div>
 
                 <div class="movie-card">
-
+                    <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
+                        onclick="showDetail()">
                 </div>
 
-                <div class="movie-card">
-
-                </div>
-
-                <div class="movie-card">
-
-                </div>
-
-                <div class="movie-card">
-
-                </div>
-
-                <div class="movie-card">
-
-                </div> -->
 
             </div>
+            
+{% endblock %}
 
-            <div id="movie-detail" style="display: none;">
-                <h1>about Time</h1>
-                <input type="button" value="영화 보러가기">
-                <p>장르: 로맨틱코미디</p>
-                <p>⭐️평점 9.30</p>
-                <p>줄거리</p>
-            </div>
-
-        </div>
-
-
-
-
-    </main>
-
-    <footer>
-
-        <h5>Making Challenge Project</h5>
-
-    </footer>
-
-</body>
-
-</html>

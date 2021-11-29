@@ -12,14 +12,15 @@ function showList() {
 }
 
 function showDetail() {
-  const m_detail = document.getElementById("movie-detail");
-  const m_list = document.getElementById("movie-list");
+  // const m_detail = document.getElementById("movie-detail");
+  // const m_list = document.getElementById("movie-list");
 
-  if (m_detail.style.display == "none") {
-    m_detail.style.display = "block";
-    m_list.style.display = "none";
-  } else {
-    m_detail.style.display = "none";
-    m_list.style.display = "flex";
-  }
+  // if (m_detail.style.display == "none") {
+  //   m_detail.style.display = "block";
+  //   m_list.style.display = "none";
+  // } else {
+  //   m_detail.style.display = "none";
+  //   m_list.style.display = "flex";
+  // }
+  location.href = "/detail";
 }

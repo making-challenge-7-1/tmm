@@ -96,10 +96,10 @@ footer h5 {
 }
 
 .movie-card-head,
-.movie-card {
+.movie-card-poster {
   width: 160px;
   height: 240px;
-  background-color: black;
+  /* background-color: black; */
   /* margin: 50px; */
   /* background-image: url("http://img.movist.com/?img=/x00/05/39/50_p1.jpg"); */
   background-size: cover;
@@ -110,6 +110,10 @@ footer h5 {
   height: 160px;
   margin: 20px;
   background-image: url("http://img.movist.com/?img=/x00/05/39/50_p1.jpg");
+}
+
+.movie-card-poster{
+  margin: 20px;
 }
 
 #movie-detail {
