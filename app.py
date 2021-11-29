@@ -7,6 +7,11 @@ app = Flask(__name__)
 def init():
     return render_template("index.html")
 
+@app.route("/detail")
+def detail():
+    return render_template("detail.html")
+
+
 
 
 

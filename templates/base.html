@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="웅플릭스" />
+    <meta property="og:description" content="영화 추천 사이트" />
+    <meta property="og:image" content="{{ url_for('static', filename='images/ogimg.jpg') }}" />
+    {% block head %}
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- css init -->
+    <link rel="stylesheet" href="/static/css/default.css" />
+    <!-- css custom -->
+    <link rel="stylesheet" href="/static/css/style.css" />
+    {% block scripts %}
+    
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/15cc769352.js" crossorigin="anonymous"></script>
+    <!-- custom script -->
+    <script src="/static/scripts/main.js"></script>
+    {% endblock %}
+
+    <title>웅플릭스</title>
+
+    
+    
+    {% endblock %}
+</head>
+
+<body>
+        <header>
+                <img src="../static/images/logo.png" alt="logo" class="header-logo">
+
+                <a href="/"><h1>Woongflix</h1></a>
+
+        </header>
+
+        <div class="wrap">
+            <main>{% block main %}{% endblock %}</main>
+        </div>
+    </body>
+</html>
