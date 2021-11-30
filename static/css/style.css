@@ -1,3 +1,6 @@
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+}
 body {
   color: black;
 }
@@ -89,6 +92,7 @@ footer h5 {
 .button-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   margin: 0 auto;
 }
 
@@ -119,7 +123,67 @@ footer h5 {
 #movie-list {
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid bisque;
+  
   justify-content: center;
-  margin: 0 50px;
+  margin: 20px;
+}
+
+#movie {
+  padding: 10px;
+}
+
+.movie-title{
+  display: flex;
+  margin-bottom: 60px;
+}
+
+.movie-title ul{
+  list-style: none;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.movie-title li{
+  float: left;
+  width: 200px;
+  text-align: center;
+  border: 1px solid #c4c4c4;
+  margin-right: 15px;
+}
+
+.movie-title li a {
+  display: block;
+  padding: 15px 0;
+  font-size: 18px;
+  color: 666px;
+  font-weight: 700px;
+}
+
+.movie-chart > div > div {
+  display: inline-block;
+  width: 222px;
+  height: 482px;
+  margin-right: 10px;
+}
+
+.movie-chart > div > div .poster {
+  position: relative;
+}
+
+.movie-chart > div > div .poster img {
+  display: block;
+}
+
+.movie-chart > div > div .infor {
+  background: #fff;
+  padding: 5px 10px 10px 5px;
+  border: 1px solid #d9d9d9;
+}
+
+.infor h3 strong {
+  font-size: 15px;
+}
+
+.poster{
+  padding: 10px;
 }
