@@ -23,13 +23,12 @@
 
 </div>
 
-
 <div class="feeling">
-
     <div class="headline">
-        <h1>오늘 <b>당신</b>의 기분은 어떠신가요?</h1>
-        <h4> <b>아래 버튼</b>을 클릭하시면 당신을 위한 영화를 추천해드릴게요.</h4>
+            <h1>오늘 <b>당신</b>의 기분은 어떠신가요?</h1>
+            <h4> <b>아래 버튼</b>을 클릭하시면 당신을 위한 영화를 추천해드릴게요.</h4>
     </div>
+</div>
 
     <div class="button-container">
 
@@ -42,11 +41,55 @@
 
     <div id="movie-list" style="display: none;">
 
-        <div class="movie-card">
-            <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
-                onclick="showDetail()">
-        </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col">
 
-    </div>
+            <div class="card">
+                <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
+                <div class="card-body">
+                <p class="card-text">
+                    <h3><strong>엔칸토</strong></h3>
+                    <span>평점: 00.00점</span>
+                </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster">
+                <div class="card-body">
+                <p class="card-text">
+                    <h3><strong>엔칸토</strong></h3>
+                    <span>평점: 00.00점</span>
+                </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster">
+                <div class="card-body">
+                <p class="card-text">
+                    <h3><strong>엔칸토</strong></h3>
+                    <span>평점: 00.00점</span>
+                </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+            <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster">
+                <div class="card-body">
+                <p class="card-text">
+                    <h3><strong>엔칸토</strong></h3>
+                    <span>평점: 00.00점</span>
+                </p>
+                </div>
+            </div>
+        </div>
+        
+
+    </div> 
+
 
     {% endblock %}

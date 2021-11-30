@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 client = MongoClient("localhost", 27017)
 
-db = client.movieData
+db = client.dbMovie
 
 # main page
 @app.route("/")
@@ -25,7 +25,7 @@ def detail():
 def get_recommend_top():
 
     try:
-        target = db.movieData.find_one()
+        target = db.dbMovie.find_one()
     
     except Exception:
         
@@ -38,7 +38,7 @@ def get_recommend_top():
 @app.route("/recommend/list", methods=["GET"])
 def get_recommend_list():
     try:
-        target = db.movieData.find_one()
+        target = db.dbMovie.find_one()
     
     except Exception:
         
