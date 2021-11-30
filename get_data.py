@@ -61,4 +61,3 @@ for date in dayArray:
                        'genre': genre}
                 # print(title,score,doc,url,img_url,genre)
                 db.teamproject4.insert_one(doc)
-
