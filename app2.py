@@ -85,12 +85,11 @@ for year in range(20, 21):
                 else:
                     pass
 print("success")
-#old_content > table > tbody > tr:nth-child(2) > td.title > div > a
 
+#old_content > table > tbody > tr:nth-child(2) > td.title > div > a
 #old_content > table > tbody > tr:nth-child(3) > td.title > div > a
 
 #old_content > table > tbody > tr:nth-child(2) > td:nth-child(1) > img
-
 #old_content > table > tbody > tr:nth-child(13) > td:nth-child(1) > img
 
 #old_content > h4 > div > select > option:nth-child(2) = 드라마
@@ -99,38 +98,3 @@ print("success")
 #old_content > h4 > div > select > option:nth-child(5) = 멜로/애정/로맨스
 #old_content > h4 > div > select > option:nth-child(10) = 코미디
 #old_content > h4 > div > select > option:nth-child(18) = 액션
-
-
-# # 코딩 시작
-#
-# ## HTML 화면 보여주기
-# @app.route('/')
-# def homework():
-#     return render_template('Fourth Week HW.html')
-#
-# # quantity
-# # 주문하기(POST) API
-# @app.route('/order', methods=['POST'])
-# def save_order():
-#     name_receive = request.form['name_give']
-#     quantity_receive = request.form['quantity_give']
-#     address_receive = request.form['address_give']
-#     phone_receive = request.form['phone_give']
-#
-#     doc = {
-#         'name': name_receive, 'quantity': quantity_receive,
-#         'address': address_receive, 'phone': phone_receive
-#     }
-#     db.orders.insert_one(doc)
-#
-#     return jsonify({'msg': "주문 완료!"})
-#
-#
-# # 주문 목록보기(Read) API
-# @app.route('/order', methods=['GET'])
-# def view_orders():
-#     orders = list(db.orders.find({}, {'_id': False}))
-#     return jsonify({'all_orders': orders})
-#
-# if __name__ == '__main__':
-#     app.run('0.0.0.0', port=5000, debug=True)
