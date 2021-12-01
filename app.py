@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -50,12 +50,13 @@ def get_recommend_list():
 @app.route("/detail", methods=["GET"])
 def get_movie_detail():
     try:
-        target = db.MovieList.find_one()
+        title_receive = request.form["title_give"]
+        target = db.MovieList.find_one({"name": title_receive}, {"_id": False})
 
-    except Exception:
+    except Exception as e:
+        return {"message": "failed to search"}, 401
 
-        return jsonify({"error"})
-    return jsonify({"movie data"})
+    return {"movie_data": target}, 200
 
 
 if __name__ == "__main__":

@@ -21,8 +21,9 @@ header {
 
 header h1 {
   color: white;
+  font-size: 32px;
   font-weight: 900;
-  margin: 40px;
+  margin: 0 40px;
 }
 
 main {
@@ -84,6 +85,7 @@ footer h5 {
 }
 
 .headline h1 {
+  font-size: 32px;
   margin-bottom: 20px;
 }
 
@@ -187,6 +189,7 @@ footer h5 {
 }
 
 .poster {
+  width: 200px;
   padding: 10px;
 }
 
@@ -213,4 +216,8 @@ footer h5 {
 #tab-move {
   background-color: green;
   color: white;
+}
+
+img:hover {
+  cursor: pointer;
 }
