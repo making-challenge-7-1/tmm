@@ -30,6 +30,19 @@ function getRecommendList() {
   });
 }
 
+function getMovieList(genre) {
+  $.ajax({
+    type: "GET",
+    url: "/recommend/list",
+    data: { genre_name: genre },
+    success: function (response) {
+      console.log(response);
+    },
+  });
+
+  showList();
+}
+
 function showList() {
   let recommend = document.getElementById("movie-recommend");
   let m_list = document.getElementById("movie-list");
@@ -43,6 +56,17 @@ function showList() {
   }
 }
 
-function showDetail() {
+function showDetail(title) {
+  $.ajax({
+    type: "GET",
+    url: "/detail/",
+    data: { movie_title: title },
+    success: function (response) {
+      console.log(response);
+
+      location.href = "/detail";
+    },
+  });
+  // for test
   location.href = "/detail";
 }

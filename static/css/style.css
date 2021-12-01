@@ -1,5 +1,5 @@
 * {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 body {
   color: black;
@@ -59,13 +59,15 @@ footer h5 {
   width: 100%;
   height: auto;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 }
 
 .movie-recommend-list {
-  display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  margin: 20px;
 }
 
 .feeling {
@@ -74,7 +76,7 @@ footer h5 {
   text-align: center;
   display: flex;
   flex-direction: column;
-  margin: 30px auto;
+  margin: 40px auto;
 }
 
 .headline {
@@ -123,7 +125,7 @@ footer h5 {
 #movie-list {
   display: flex;
   flex-wrap: wrap;
-  
+
   justify-content: center;
   margin: 20px;
 }
@@ -132,18 +134,18 @@ footer h5 {
   padding: 10px;
 }
 
-.movie-title{
+.movie-title {
   display: flex;
   margin-bottom: 60px;
 }
 
-.movie-title ul{
+.movie-title ul {
   list-style: none;
   overflow: hidden;
   margin: 0 auto;
 }
 
-.movie-title li{
+.movie-title li {
   float: left;
   width: 200px;
   text-align: center;
@@ -184,6 +186,31 @@ footer h5 {
   font-size: 15px;
 }
 
-.poster{
+.poster {
   padding: 10px;
+}
+
+.nav-item {
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+#tab-happy {
+  background-color: blue;
+  color: white;
+}
+
+#tab-angry {
+  color: white;
+  background-color: red;
+}
+
+#tab-sad {
+  background-color: gray;
+  color: white;
+}
+
+#tab-move {
+  background-color: green;
+  color: white;
 }
