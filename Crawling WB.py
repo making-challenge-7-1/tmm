@@ -49,7 +49,9 @@ for year in range(17, 22):
                         rank = 0
                         break #동작 중지
                     else: #해당 데이터일 경우 값일경우
-                        movie = db.moviess.find_one({'title': title}) #DB에서 title 검색
+
+                        movie = db.movies.find_one({'title': title}) #DB에서 title 검색
+
                         if movie == None:
                             movieurl = 'https://movie.naver.com'+url #영화 url선언
                             headers = {'User-Agent': 'Mozilla / 5.0(WindowsNT10.0;Win64;x64)AppleWebKit / 537.36(KHTML, likeGecko) Chrome / 73.0.3683.86Safari / 537.36'}
@@ -81,8 +83,7 @@ for year in range(17, 22):
                             db.movies.update_one({'title': title}, {'$set': {'genre3': genre}})
                             rank = rank + 1
                         else:
-                            print(title, rank, genre)
-
+                            pass
                 else:
                     pass
 print("success")
