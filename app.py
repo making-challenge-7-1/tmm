@@ -1,4 +1,4 @@
-from flask import( Flask, json, render_template, jsonify)
+from flask import Flask, render_template, jsonify
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -20,15 +20,15 @@ def detail():
     return render_template("detail.html")
 
 
-# top 4 movie get
+# top 4 movie get 기분별 하나씩 랜덤하게 가져오기
 @app.route("/recommend/top", methods=["GET"])
 def get_recommend_top():
 
     try:
-        target = db.dbMovie.find_one()
-    
+        target = db.MovieList.find_one()
+
     except Exception:
-        
+
         return jsonify({"error"})
 
     return jsonify({"test"})
@@ -38,10 +38,10 @@ def get_recommend_top():
 @app.route("/recommend/list", methods=["GET"])
 def get_recommend_list():
     try:
-        target = db.dbMovie.find_one()
-    
+        target = db.MovieList.find()
+
     except Exception:
-        
+
         return jsonify({"error"})
 
     return jsonify({"movie list"})
@@ -49,7 +49,12 @@ def get_recommend_list():
 
 @app.route("/detail", methods=["GET"])
 def get_movie_detail():
+    try:
+        target = db.MovieList.find_one()
 
+    except Exception:
+
+        return jsonify({"error"})
     return jsonify({"movie data"})
 
 
