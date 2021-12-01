@@ -2,30 +2,30 @@
 {% block main %}
 <div id="movie-recommend">
 
-    <div class="row movie-recommend-list">
-        <div class="col">
+    <div class="columns movie-recommend-list">
+        <div class="column">
             <div id="head-happy">
                 <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
                     onclick="showDetail()">
             </div>
         </div>
 
-                <div class="col">
-            <div id="head-happy">
+        <div class="column">
+            <div id="head-angry">
                 <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
                     onclick="showDetail()">
             </div>
         </div>
 
-                <div class="col">
-            <div id="head-happy">
+        <div class="column">
+            <div id="head-sad">
                 <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
                     onclick="showDetail()">
             </div>
         </div>
 
-                <div class="col">
-            <div id="head-happy">
+        <div class="column">
+            <div id="head-move">
                 <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
                     onclick="showDetail()">
             </div>
@@ -120,8 +120,37 @@
             </div>
         </div> 
 </div> #}
-<div class="container">
-<ul class="nav nav-pills nav-justified">
+{# <div class="category-container"> #}
+<div class="tabs is-toggle is-fullwidth is-large">
+  <ul>
+    <li>
+      <a href="#movie-list"  onclick="showList()">
+        <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+        <span>즐거움</span>
+      </a>
+    </li>
+    <li>
+      <a href="#movie-list"  onclick="showList()">
+        <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+        <span>분노</span>
+      </a>
+    </li>
+    <li>
+      <a href="#movie-list"  onclick="showList()">
+        <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+        <span>슬픔</span>
+      </a>
+    </li>
+    <li>
+      <a href="#movie-list"  onclick="showList()">
+        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+        <span>외로움</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+{# <ul class="nav nav-pills nav-justified">
   <li class="nav-item">
     <a class="nav-link" id="tab-happy" href="#movie-list"  onclick="showList()">즐거움</a>
   </li>
@@ -134,14 +163,13 @@
   <li class="nav-item">
     <a class="nav-link" id="tab-move" href="#movie-list" onclick="showList()">떠나고싶음</a>
   </li>
-</ul>    
-</div>
+</ul>     #}
+{# </div> #}
 
-<div id="movie-list" style="display: none;">
+{# <div id="movie-list" style="display: none;"> #}
 
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div class="col">
-
+        <div class="columns" id="movie-list" style="display: none;">
+            <div class="column">
                 <div class="card">
                     <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
                     <div class="card-body">
@@ -152,9 +180,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="column">
                 <div class="card">
-                    <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster">
+                    <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
                     <div class="card-body">
                     <p class="card-text">
                         <h3><strong>엔칸토</strong></h3>
@@ -163,9 +191,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="column">
                 <div class="card">
-                    <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster">
+                    <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
                     <div class="card-body">
                     <p class="card-text">
                         <h3><strong>엔칸토</strong></h3>
@@ -174,9 +202,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="column">
                 <div class="card">
-                <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster">
+                <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
                     <div class="card-body">
                     <p class="card-text">
                         <h3><strong>엔칸토</strong></h3>
@@ -186,5 +214,5 @@
                 </div>
             </div>
         </div> 
-</div>
+{# </div> #}
 {% endblock %}
