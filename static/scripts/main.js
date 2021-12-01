@@ -37,6 +37,28 @@ function getMovieList(genre) {
     data: { genre_name: genre },
     success: function (response) {
       console.log(response);
+
+      let movieList = response["movie_list"];
+
+      for (let i = 0; i < movieList.length; i++) {
+        let poster = movieList[i]["img_url"];
+        let title = movieList[i]["title"];
+        let score = movieList[i]["score"];
+
+        let movie_item = `<div class="column">
+                              <div class="card">
+                                <img src="${poster}" class="card-img poster" alt="poster" onclick="showDetail()">
+                                <div class="card-body">
+                                  <p class="card-text">
+                                  <h3><strong>${title}</strong></h3>
+                                  <span>평점: ${score} 점</span>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>`;
+
+        $("movie-list").append(movie_item);
+      }
     },
   });
 
@@ -56,17 +78,18 @@ function showList() {
   }
 }
 
-function showDetail(title) {
+function getMovieInfo(title) {
   $.ajax({
     type: "GET",
-    url: "/detail/",
+    url: "/detail",
     data: { movie_title: title },
     success: function (response) {
       console.log(response);
-
-      location.href = "/detail";
     },
   });
-  // for test
+  showDetail();
+}
+
+function showDetail() {
   location.href = "/detail";
 }
