@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61587984-f316-4944-8829-c204918d565c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/woongflix.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/woongflix.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +64,7 @@
       <option name="presentableId" value="Default" />
       <updated>1638344874136</updated>
       <workItem from="1638344880632" duration="1011000" />
+      <workItem from="1638437496772" duration="277000" />
     </task>
     <servers />
   </component>
