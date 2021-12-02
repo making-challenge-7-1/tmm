@@ -1,20 +1,26 @@
 {% extends "base.html" %} {% block main %}
 <style>
   .container {
-          margin: 50px auto auto auto
-        }
+    margin: 50px auto auto auto;
+  }
 
-        .row {
-          border-style: solid hidden solid hidden;
-          padding: 10px;
-        }
+  .column {
+    border-style: solid hidden solid hidden;
+    padding: 10px;
+  }
 </style>
 <div class="container">
-  <div class="row">
-    <div class="col">
-      <input type="image" src="abouttime.jpeg" width="202" height="290" style="float: right">
+  <div class="columns">
+    <div class="column">
+      <input
+        type="image"
+        src="./static/images/abouttime.jpeg"
+        width="202"
+        height="290"
+        style="float: right"
+      />
     </div>
-    <div class="col">
+    <div class="column">
       <h1>about Time</h1>
       <p>영화 보러가기</p>
       <p>장르: 로맨틱코미디</p>
@@ -23,4 +29,8 @@
     </div>
   </div>
 </div>
+
+<!-- custom script -->
+<script src="/static/scripts/main.js"></script>
+
 {% endblock %}
