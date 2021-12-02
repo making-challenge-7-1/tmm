@@ -10,19 +10,32 @@ function getRecommendList() {
     success: function (response) {
       console.log(response);
 
-      let happy_img = `<img src="" alt="" class="movie-card-poster"
-                onclick="showDetail()">`;
+      let recommendList = response["recommendTop"];
+      let happyTitle = recommendList[0];
+      let happyImg = recommendList[1];
 
-      let angry_img = `<img src="" alt="" class="movie-card-poster"
-                onclick="showDetail()">`;
+      let angryTitle = recommendList[2];
+      let angryImg = recommendList[3];
 
-      let sad_img = `<img src="" alt="" class="movie-card-poster"
-                onclick="showDetail()">`;
+      let sadTitle = recommendList[4];
+      let sadImg = recommendList[5];
 
-      let move_img = `<img src="" alt="" class="movie-card-poster"
-                onclick="showDetail()">`;
+      let moveTitle = recommendList[6];
+      let moveImg = recommendList[7];
 
-      $("#head-happy").append(happy_img);
+      let happy_item = `<img src="${happyImg}" alt="${happyTitle}" class="movie-card-poster"
+                onclick="showDetail('${happyTitle}')">`;
+
+      let angry_img = `<img src="${angryImg}" alt="${angryTitle}" class="movie-card-poster"
+                onclick="showDetail('${angryTitle}')">`;
+
+      let sad_img = `<img src="${sadImg}" alt="${sadTitle}" class="movie-card-poster"
+                onclick="showDetail('${sadTitle}')">`;
+
+      let move_img = `<img src="${moveImg}" alt="${moveTitle}" class="movie-card-poster"
+                onclick="showDetail('${moveTitle}')">`;
+
+      $("#head-happy").append(happy_item);
       $("#head-angry").append(angry_img);
       $("#head-sad").append(sad_img);
       $("#head-move").append(move_img);
@@ -31,9 +44,12 @@ function getRecommendList() {
 }
 
 function getMovieList(genre) {
+  console.log(genre);
+
   $.ajax({
     type: "GET",
     url: "/recommend/list",
+    // url: "#movie-list",
     data: { genre_name: genre },
     success: function (response) {
       console.log(response);
@@ -76,18 +92,6 @@ function showList() {
     recommend.style.display = "none";
     m_list.style.display = "flex";
   }
-}
-
-function getMovieInfo(title) {
-  $.ajax({
-    type: "GET",
-    url: "/detail",
-    data: { movie_title: title },
-    success: function (response) {
-      console.log(response);
-    },
-  });
-  showDetail();
 }
 
 function showDetail() {
