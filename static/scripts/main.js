@@ -8,8 +8,7 @@ function getRecommendList() {
     url: "/recommend/top",
     data: {},
     success: function (response) {
-      console.log(response);
-
+      
       let recommendList = response["recommendTop"];
       let happyTitle = recommendList[0];
       let happyImg = recommendList[1];
@@ -23,8 +22,7 @@ function getRecommendList() {
       let moveTitle = recommendList[6];
       let moveImg = recommendList[7];
 
-      let happy_item = `<img src="${happyImg}" alt="${happyTitle}" class="movie-card-poster"
-                onclick="showDetail('${happyTitle}')">`;
+      let happy_item = `<a href="/detail" onclick="getMovieInfo('${happyTitle}')"><img src="${happyImg}" alt="${happyTitle}" class="movie-card-poster"></a>`;
 
       let angry_img = `<img src="${angryImg}" alt="${angryTitle}" class="movie-card-poster"
                 onclick="showDetail('${angryTitle}')">`;
@@ -47,7 +45,7 @@ function getMovieList(genre) {
   console.log(genre);
 
   $.ajax({
-    type: "GET",
+    type: "POST",
     url: "/recommend/list",
     // url: "#movie-list",
     data: { genre_name: genre },
@@ -73,7 +71,7 @@ function getMovieList(genre) {
                               </div>
                             </div>`;
 
-        $("movie-list").append(movie_item);
+        $("#movie-list").append(movie_item);
       }
     },
   });
@@ -94,6 +92,5 @@ function showList() {
   }
 }
 
-function showDetail() {
-  location.href = "/detail";
-}
+
+
