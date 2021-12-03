@@ -44,24 +44,28 @@ function getRecommendList() {
 function getMovieList(genre) {
   console.log(genre);
 
+  $("#movie-list").empty();
+
   $.ajax({
     type: "POST",
     url: "/recommend/list",
     // url: "#movie-list",
     data: { genre_name: genre },
     success: function (response) {
-      console.log(response);
+      // console.log(response);
+
 
       let movieList = response["movie_list"];
+      // console.log(movieList);
 
       for (let i = 0; i < movieList.length; i++) {
         let poster = movieList[i]["img_url"];
         let title = movieList[i]["title"];
         let score = movieList[i]["score"];
 
-        let movie_item = `<div class="column">
+        let movie_item = `<div class="column is-one-quarter">
                               <div class="card">
-                                <img src="${poster}" class="card-img poster" alt="poster" onclick="showDetail()">
+                                <a href="/detail" onclick="getMovieInfo('${title}')"><img src="${poster}" class="card-img poster" alt="poster"></a>
                                 <div class="card-body">
                                   <p class="card-text">
                                   <h3><strong>${title}</strong></h3>

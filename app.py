@@ -15,14 +15,14 @@ movieList = db.tp7
 
 app.secret_key = "ABCDEFG"
 
-# main page
+# main page view
 @app.route("/")
 def init():
     return render_template("index.html")
 
 
-# detail page
-@app.route("/detail")
+# detail page view
+@app.route("/detail", methods=['GET'])
 def detail():
     return render_template("detail.html")
 
@@ -75,15 +75,16 @@ def get_recommend_top():
 def get_recommend_list():
     try:
         genre_receive = request.form["genre_name"]
-        print(genre_receive)
+        # print(genre_receive)
 
-        movie_list = list(movieList.find({"genre": genre_receive}), {"_id": False})
+        movie_list = list(movieList.find({"genre": genre_receive}, {"_id": False}))
+        # print(movie_list)
 
     except Exception:
 
         return jsonify({"error"})
 
-    return jsonify({"movie list": movie_list})
+    return jsonify({"movie_list": movie_list})
 
 
 # get movie detail
@@ -91,10 +92,10 @@ def get_recommend_list():
 def find_movie_detail():
     try:
         title_receive = request.form["title_give"]
-        # print(title_receive)
+        print(title_receive)
 
         target = movieList.find_one({"title": title_receive}, {"_id": False})
-        # print(target)
+        print(target)
 
 
     except Exception as e:
