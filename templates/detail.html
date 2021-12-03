@@ -10,27 +10,16 @@
   }
 </style>
 <div class="container">
-  <div class="columns">
-    <div class="column">
-      <input
-        type="image"
-        src="./static/images/abouttime.jpeg"
-        width="202"
-        height="290"
-        style="float: right"
-      />
-    </div>
-    <div class="column">
-      <h1>about Time</h1>
-      <p>영화 보러가기</p>
-      <p>장르: 로맨틱코미디</p>
-      <p>⭐️평점 9.30</p>
-      <p>줄거리</p>
-    </div>
+  <div class="columns" >
+    
+  </div>
+  <div id="movie_detail">
+  text
   </div>
 </div>
 
 <!-- custom script -->
-<script src="/static/scripts/main.js"></script>
-
+  {% block javascript %} 
+    <script src="./static/scripts/detail.js"></script>
+  {% endblock %}
 {% endblock %}

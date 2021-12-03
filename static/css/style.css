@@ -221,3 +221,9 @@ footer h5 {
 img:hover {
   cursor: pointer;
 }
+
+#movie_detail{
+  width: 100%;
+  height: auto;
+  background-color: cadetblue;
+}
