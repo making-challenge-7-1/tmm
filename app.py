@@ -1,37 +1,30 @@
 from flask import Flask, render_template, jsonify, request
 from pymongo import MongoClient
 
+import random
+
 app = Flask(__name__)
 
-# client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
-# db = client.dbsparta
+client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
+db = client.dbsparta
 
-client = MongoClient("localhost", 27017)
+# client = MongoClient("localhost", 27017)
 
-db = client.dbMovie
+# db = client.dbMovie
 movieList = db.tp7
 
-# main page
+app.secret_key = "ABCDEFG"
+
+# main page view
 @app.route("/")
 def init():
     return render_template("index.html")
 
-getImg_url_Array = []
 
-# @app.route("/detail", methods=["POST"])
-# def detail():
-
-    # receiveImg_url = request.form['img_url_give']
-    # getImg_url: db.tp7.find_one({'img_url': receiveImg_url})
-    # getImg_url_Array.append(getImg_url)
-    # return jsonify('msg':'POST 연결되었습니다!')
-
-# detail page
-@app.route("/detail", methods=["GET"])
+# detail page view
+@app.route("/detail", methods=['GET'])
 def detail():
-     # woongData[0] = db.tp7.find_one({'img_url':getImg_url}, {'_id':False})
-     # getImg_url_Array
-     return jsonify('movie': 'woongData')
+    return render_template("detail.html")
 
 
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
@@ -41,29 +34,32 @@ def get_recommend_top():
     recommend_top = []
 
     try:
-        happy_item = movieList.find_one({"genre": "신남"}, {"_id": False})
-        # print(happy_item)
-        happy_title = happy_item["title"]
-        happy_img = happy_item["img_url"]
+        happy_list = list(movieList.find({"genre": "신남"}, {"_id": False}))
+        today_happy = random.sample(happy_list, 1)[0]
+        
+        happy_title = today_happy["title"]
+        happy_img = today_happy["img_url"]
         recommend_top.append(happy_title)
         recommend_top.append(happy_img)
-        # print(recommend_top)
-
-        angry_item = movieList.find_one({"genre": "화남"}, {"_id": False})
-        angry_title = angry_item["title"]
-        angry_img = angry_item["img_url"]
+        
+        angry_list = list(movieList.find({"genre": "화남"}, {"_id": False}))
+        today_angry = random.sample(angry_list, 1)[0]        
+        angry_title = today_angry["title"]
+        angry_img = today_angry["img_url"]
         recommend_top.append(angry_title)
         recommend_top.append(angry_img)
 
-        sad_item = movieList.find_one({"genre": "우울"}, {"_id": False})
-        sad_title = sad_item["title"]
-        sad_img = sad_item["img_url"]
+        sad_list = list(movieList.find({"genre": "우울"}, {"_id": False}))
+        today_sad = random.sample(sad_list, 1)[0]        
+        sad_title = today_sad["title"]
+        sad_img = today_sad["img_url"]
         recommend_top.append(sad_title)
         recommend_top.append(sad_img)
 
-        move_item = movieList.find_one({"genre": "떠남"}, {"_id": False})
-        move_title = move_item["title"]
-        move_img = move_item["img_url"]
+        move_list = list(movieList.find({"genre": "떠남"}, {"_id": False}))
+        today_move = random.sample(move_list, 1)[0]        
+        move_title = today_move["title"]
+        move_img = today_move["img_url"]
         recommend_top.append(move_title)
         recommend_top.append(move_img)
 
@@ -75,32 +71,37 @@ def get_recommend_top():
 
 
 # get all movie by genre
-@app.route("/recommend/list", methods=["GET"])
+@app.route("/recommend/list", methods=["POST"])
 def get_recommend_list():
     try:
         genre_receive = request.form["genre_name"]
-        print(genre_receive)
+        # print(genre_receive)
 
-        movie_list = list(movieList.find({"genre": genre_receive}), {"_id": False})
+        movie_list = list(movieList.find({"genre": genre_receive}, {"_id": False}))
+        # print(movie_list)
 
     except Exception:
 
         return jsonify({"error"})
 
-    return jsonify({"movie list": movie_list})
+    return jsonify({"movie_list": movie_list})
 
 
 # get movie detail
-@app.route("/detail", methods=["GET"])
-def get_movie_detail():
+@app.route("/find", methods=["POST"])
+def find_movie_detail():
     try:
         title_receive = request.form["title_give"]
-        target = movieList.find_one({"name": title_receive}, {"_id": False})
+        print(title_receive)
+
+        target = movieList.find_one({"title": title_receive}, {"_id": False})
+        print(target)
+
 
     except Exception as e:
         return {"message": "failed to search"}, 401
 
-    return {"movie_data": target}, 200
+    return jsonify({"movie_data": target})
 
 
 if __name__ == "__main__":

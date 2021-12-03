@@ -1,9 +1,16 @@
-<!-- JS -->
-
-
 $(document).ready(() => {
   getRecommendList();
 });
+
+const aa = 1
+let needSrc;
+needSrc = 1
+
+console.log(needSrc)
+
+needSrc = 2
+
+console.log(needSrc)
 
 function getRecommendList() {
   $.ajax({
@@ -11,8 +18,7 @@ function getRecommendList() {
     url: "/recommend/top",
     data: {},
     success: function (response) {
-      console.log(response);
-
+      
       let recommendList = response["recommendTop"];
       let happyTitle = recommendList[0];
       let happyImg = recommendList[1];
@@ -26,8 +32,7 @@ function getRecommendList() {
       let moveTitle = recommendList[6];
       let moveImg = recommendList[7];
 
-      let happy_item = `<img src="${happyImg}" alt="${happyTitle}" class="movie-card-poster"
-                onclick="showDetail('${happyTitle}')">`;
+      let happy_item = `<a href="/detail" onclick="getMovieInfo('${happyTitle}')"><img src="${happyImg}" alt="${happyTitle}" class="movie-card-poster"></a>`;
 
       let angry_img = `<img src="${angryImg}" alt="${angryTitle}" class="movie-card-poster"
                 onclick="showDetail('${angryTitle}')">`;
@@ -49,24 +54,28 @@ function getRecommendList() {
 function getMovieList(genre) {
   console.log(genre);
 
+  $("#movie-list").empty();
+
   $.ajax({
-    type: "GET",
+    type: "POST",
     url: "/recommend/list",
     // url: "#movie-list",
     data: { genre_name: genre },
     success: function (response) {
-      console.log(response);
+      // console.log(response);
+
 
       let movieList = response["movie_list"];
+      // console.log(movieList);
 
       for (let i = 0; i < movieList.length; i++) {
         let poster = movieList[i]["img_url"];
         let title = movieList[i]["title"];
         let score = movieList[i]["score"];
 
-        let movie_item = `<div class="column">
+        let movie_item = `<div class="column is-one-quarter">
                               <div class="card">
-                                <img src="${poster}" class="card-img poster" alt="poster" onclick="showDetail()">
+                                <a href="/detail" onclick="getMovieInfo('${title}')"><img src="${poster}" class="card-img poster" alt="poster"></a>
                                 <div class="card-body">
                                   <p class="card-text">
                                   <h3><strong>${title}</strong></h3>
@@ -76,13 +85,21 @@ function getMovieList(genre) {
                               </div>
                             </div>`;
 
-        $("movie-list").append(movie_item);
-      }
-    },
-  });
-
+        $("#movie-list").append(movie_item);
+// 출처: https://kgu0724.tistory.com/229 [병아리 개발자의 이야기]
+        // const card = document.querySelector('.card')
+        // card.addEventListener('click', b)
+        // card.forEach(console.log(1))
+        // console.log(card.innerHTML.split('"')[5])
+        // needSrc = card.innerHTML.split('"')[5]
+    }
+  }});
 
   showList();
+}
+
+function b(){
+
 }
 
 function showList() {
@@ -97,42 +114,3 @@ function showList() {
     m_list.style.display = "flex";
   }
 }
-
-function showDetail() {
-  const card = document.querySelector('.card')
-  console.log(card)
-  let img_url;
-  card.addEventListener('click',
-      function(){img_url = this.innerHTML.split('"')[1]})
-
-  // 선택자.addEventListener('')
-
-  $.ajax({
-    type: "POST",
-    url: "/detail",
-    data: {'img_url_give': img_url},
-    success: function (response) {
-      alert('성공')
-      console.log(response);
-    },
-  });
-}
-  // location.href = "/detail";
-
-
-// function getMovieInfo() {
-
-// let clickImageUrl;
-//
-// const aa = document.querySelectorAll('.card');
-// aa.forEach(function(target){target.addEventListener('click',clickImageUrlFunction)})
-// console.log(aa)
-// // 여기서 $(ㅁㄴㅇ): ajax
-// // post로 준다
-// // 데이터를 저장하고
-// // type: "POST",
-// //     url: /give
-// function clickImageUrlFunction(){
-//   console.log(this)
-//
-// }
