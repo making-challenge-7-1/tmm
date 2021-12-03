@@ -1,56 +1,27 @@
 {% extends "base.html" %}
 {% block main %}
+<div id="movie-today">
+    <h2>Today's Pick</h2>
+</div>
 <div id="movie-recommend">
-
     <div class="columns movie-recommend-list">
         <div class="column">
             <div id="head-happy" class="movie-card-head">
-                {# <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
-                    onclick="showDetail()"> #}
             </div>
         </div>
-
         <div class="column">
             <div id="head-angry" class="movie-card-head">
-                {# <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
-                    onclick="showDetail()"> #}
             </div>
         </div>
-
         <div class="column">
             <div id="head-sad" class="movie-card-head">
-                {# <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
-                    onclick="showDetail()"> #}
             </div>
         </div>
-
         <div class="column">
             <div id="head-move" class="movie-card-head">
-                {# <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
-                    onclick="showDetail()"> #}
             </div>
         </div>
     </div>
-
-    {# <div class="movie-recommend-list">
-        <div class="movie-card-head" id="head-happy">
-            <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
-                onclick="showDetail()">
-        </div>
-        <div class="movie-card-head" id="head-angry">
-            <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
-                onclick="showDetail()">
-        </div>
-        <div class="movie-card-head" id="head-sad">
-            <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
-                onclick="showDetail()">
-        </div>
-        <div class="movie-card-head" id="head-move">
-            <img src="http://img.movist.com/?img=/x00/05/39/50_p1.jpg" alt="" class="movie-card-poster"
-                onclick="showDetail()">
-        </div>
-    </div> #}
-
 </div>
 
 <div class="feeling">
@@ -60,168 +31,41 @@
     </div>
 </div>
 
-{# <div class="button-container">
-
-        <button type="button" class="btn btn-primary btn-main" onclick="showList()">즐거움</button>
-        <button type="button" class="btn btn-danger btn-main" onclick="showList()">분노</button>
-        <button type="button" class="btn btn-secondary btn-main" onclick="showList()">슬픔</button>
-        <button type="button" class="btn btn-success btn-main" onclick="showList()">떠나고싶음</button>
-
-</div> #}
-
-{# <div id="movie-list" style="display: none;">
-
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-            <div class="col">
-
-                <div class="card">
-                    <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
-                    <div class="card-body">
-                    <p class="card-text">
-                        <h3><strong>엔칸토</strong></h3>
-                        <span>평점: 00.00점</span>
-                    </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster">
-                    <div class="card-body">
-                    <p class="card-text">
-                        <h3><strong>엔칸토</strong></h3>
-                        <span>평점: 00.00점</span>
-                    </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster">
-                    <div class="card-body">
-                    <p class="card-text">
-                        <h3><strong>엔칸토</strong></h3>
-                        <span>평점: 00.00점</span>
-                    </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster">
-                    <div class="card-body">
-                    <p class="card-text">
-                        <h3><strong>엔칸토</strong></h3>
-                        <span>평점: 00.00점</span>
-                    </p>
-                    </div>
-                </div>
-            </div>
-        </div> 
-</div> #}
-{# <div class="category-container"> #}
 <div class="tabs is-toggle is-fullwidth is-large">
   <ul>
     <li>
       <a href="#movie-list"  onclick="getMovieList('신남')">
         <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
-        <span>즐거움</span>
+        <span>신남</span>
       </a>
     </li>
     <li>
-      <a href="#movie-list"  onclick="showList()">
+      <a href="#movie-list"  onclick="getMovieList('화남')">
         <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-        <span>분노</span>
+        <span>화남</span>
       </a>
     </li>
     <li>
-      <a href="#movie-list"  onclick="showList()">
+      <a href="#movie-list"  onclick="getMovieList('우울')">
         <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
-        <span>슬픔</span>
+        <span>우울</span>
       </a>
     </li>
     <li>
-      <a href="#movie-list"  onclick="showList()">
+      <a href="#movie-list"  onclick="getMovieList('떠남')">
         <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
-        <span>외로움</span>
+        <span>여행</span>
       </a>
     </li>
   </ul>
 </div>
 
-{# <ul class="nav nav-pills nav-justified">
-  <li class="nav-item">
-    <a class="nav-link" id="tab-happy" href="#movie-list"  onclick="showList()">즐거움</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="tab-angry" href="#movie-list" onclick="showList()">분노</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="tab-sad" href="#movie-list" onclick="showList()">슬픔</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="tab-move" href="#movie-list" onclick="showList()">떠나고싶음</a>
-  </li>
-</ul>     #}
-{# </div> #}
-
-{# <div id="movie-list" style="display: none;"> #}
-
 <div class="columns" id="movie-list" style="display: none;">
-    
-    <div class="column">
-        <div class="card">
-            <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
-            <div class="card-body">
-                <p class="card-text">
-                    <h3><strong>엔칸토</strong></h3>
-                    <span>평점: 00.00점</span>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="column">
-        <div class="card">
-            <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
-            <div class="card-body">
-                <p class="card-text">
-                    <h3><strong>엔칸토</strong></h3>
-                    <span>평점: 00.00점</span>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="column">
-        <div class="card">
-            <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
-            <div class="card-body">
-                <p class="card-text">
-                    <h3><strong>엔칸토</strong></h3>
-                    <span>평점: 00.00점</span>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="column">
-        <div class="card">
-            <img src="https://movie-phinf.pstatic.net/20211116_218/1637044152743qvvAG_JPEG/movie_image.jpg" class="card-img poster" alt="poster" onclick="showDetail()">
-            <div class="card-body">
-                <p class="card-text">
-                    <h3><strong>엔칸토</strong></h3>
-                    <span>평점: 00.00점</span>
-                </p>
-            </div>
-        </div>
-    </div>            
 </div> 
-{# </div> #}
 
 <!-- custom script -->
- {% block javascript %} 
- <script src="./static/scripts/main.js"></script>
- <script src="./static/scripts/detail.js"></script>
- {% endblock %}
+    {% block javascript %} 
+        <script src="./static/scripts/main.js"></script>
+{# <script src="./static/scripts/detail.js"></script> #}
+        {% endblock %}
 {% endblock %}
