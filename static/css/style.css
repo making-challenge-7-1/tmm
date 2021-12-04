@@ -5,8 +5,13 @@ body {
   color: black;
 }
 
-.container{
-  min-height: 100vw;
+.content{
+  min-height: 100px;
+  margin-top: 15px;
+}
+.boxPadding{
+  padding-left: 220px;
+
 }
 a:hover {
   text-decoration: none;
@@ -220,5 +225,4 @@ img:hover {
 #movie_detail{
   width: 100%;
   height: auto;
-  background-color: cadetblue;
 }
