@@ -2,6 +2,16 @@ $(document).ready(() => {
   getRecommendList();
 });
 
+const aa = 1
+let needSrc;
+needSrc = 1
+
+console.log(needSrc)
+
+needSrc = 2
+
+console.log(needSrc)
+
 function getRecommendList() {
   $.ajax({
     type: "GET",
@@ -76,11 +86,20 @@ function getMovieList(genre) {
                             </div>`;
 
         $("#movie-list").append(movie_item);
-      }
-    },
-  });
+// 출처: https://kgu0724.tistory.com/229 [병아리 개발자의 이야기]
+        // const card = document.querySelector('.card')
+        // card.addEventListener('click', b)
+        // card.forEach(console.log(1))
+        // console.log(card.innerHTML.split('"')[5])
+        // needSrc = card.innerHTML.split('"')[5]
+    }
+  }});
 
   showList();
+}
+
+function b(){
+
 }
 
 function showList() {
@@ -95,6 +114,3 @@ function showList() {
     m_list.style.display = "flex";
   }
 }
-
-
-
