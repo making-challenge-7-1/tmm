@@ -95,19 +95,10 @@ main {
 }
 
 .movie-card-head {
-  width: 120px;
-  height: 160px;
+  width: 150px;
+  height: 180px;
   margin: 20px;
   align-items: center;
-}
-
-.movie-card-poster {
-  width: 120px;
-  height: 160px;
-}
-
-.movie-card-poster:hover {
-  cursor: pointer;
 }
 
 #movie-list {
@@ -136,8 +127,11 @@ main {
   margin: 0 10px;
 }
 
-img:hover {
+/* img:hover {
   cursor: pointer;
+} */
+input:hover{
+  cursor: default;
 }
 
 #movie_detail{
