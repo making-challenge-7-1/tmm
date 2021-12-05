@@ -22,13 +22,13 @@ function getRecommendList() {
       let moveTitle = recommendList[6];
       let moveImg = recommendList[7];
 
-      let happy_item = `<a href="/detail" onclick="getMovieInfo('${happyTitle}')"><img src="${happyImg}" alt="${happyTitle}" class="movie-card-poster"></a>`;
+      let happy_item = `<a href="/detail" onclick="getMovieInfo('${happyTitle}')"><figure class="image is-3by4"><img src="${happyImg}" alt="${happyTitle}"></figure></a>`;
 
-      let angry_img = `<a href="/detail" onclick="getMovieInfo('${angryTitle}')"><img src="${angryImg}" alt="${angryTitle}" class="movie-card-poster"></a>`;
+      let angry_img = `<a href="/detail" onclick="getMovieInfo('${angryTitle}')"><figure class="image is-3by4"><img src="${angryImg}" alt="${angryTitle}"></figure></a>`;
 
-      let sad_img = `<a href="/detail" onclick="getMovieInfo('${sadTitle}')"><img src="${sadImg}" alt="${sadTitle}" class="movie-card-poster"></a>`;
+      let sad_img = `<a href="/detail" onclick="getMovieInfo('${sadTitle}')"><figure class="image is-3by4"><img src="${sadImg}" alt="${sadTitle}"></figure></a>`;
 
-      let move_img = `<a href="/detail" onclick="getMovieInfo('${moveTitle}')"><img src="${moveImg}" alt="${moveTitle}" class="movie-card-poster"></a>`;
+      let move_img = `<a href="/detail" onclick="getMovieInfo('${moveTitle}')"><figure class="image is-3by4"><img src="${moveImg}" alt="${moveTitle}"></figure></a>`;
 
       $("#head-happy").append(happy_item);
       $("#head-angry").append(angry_img);
