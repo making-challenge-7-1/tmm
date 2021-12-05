@@ -1,27 +1,29 @@
 {% extends "base.html" %}
 {% block main %}
-<div id="movie-today">
-    <h2>Today's Pick</h2>
-</div>
+
 <div id="movie-recommend">
-    <div class="columns movie-recommend-list">
-        <div class="column">
+  <div id="movie-recommend-title">
+  <h2 class="title">Today's Pick</h2>
+  </div>
+  
+  <div class="columns movie-recommend-list">
+        <div class="column is-one-quarter movie-recommend-item">
             <div id="head-happy" class="movie-card-head">
             </div>
         </div>
-        <div class="column">
+        <div class="column is-one-quarter movie-recommend-item">
             <div id="head-angry" class="movie-card-head">
             </div>
         </div>
-        <div class="column">
+        <div class="column is-one-quarter movie-recommend-item">
             <div id="head-sad" class="movie-card-head">
             </div>
         </div>
-        <div class="column">
+        <div class="column is-one-quarter movie-recommend-item">
             <div id="head-move" class="movie-card-head">
             </div>
         </div>
-    </div>
+    </div>  
 </div>
 
 <div class="feeling">

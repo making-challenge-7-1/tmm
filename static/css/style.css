@@ -22,6 +22,9 @@ a:hover {
   font-weight: 800;
 
 }
+.recommend-title{
+  width: 100%;
+}
 
 main {
   display: flex;
@@ -47,9 +50,17 @@ main {
   width: 100%;
   height: auto;
   text-align: center;
+  justify-content: center;
+  margin: 20px;
+}
+#movie-recommend-title{
+  margin: 20px;
+}
+
+.movie-recommend-item{
   display: flex;
   justify-content: center;
-  margin: 0 20px;
+  align-items: center;
 }
 
 .movie-recommend-list {
@@ -95,8 +106,7 @@ main {
 }
 
 .movie-card-head {
-  width: 150px;
-  height: 180px;
+  width: 200px;
   margin: 20px;
   align-items: center;
 }
