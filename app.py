@@ -21,10 +21,35 @@ def init():
     return render_template("index.html")
 
 
+# happy_list = list(movieList.find({"genre": "신남"}, {"_id": False}))
+
+
+# happy_title = happy_list["title"]
+
+# print(happy_title)
+
+
+# cut score
+# def cutScore(item):
+#     if((item) > 6):
+#         return item
+
 # detail page view
 @app.route("/detail", methods=['GET'])
 def detail():
     return render_template("detail.html")
+
+tests = list(movieList.find({'genre':'신남'},{'_id':False}))
+print(tests)
+
+def cutName(n) :
+    score = float(n["score"])
+    if score > 6 :
+        return n
+test = list(map(cutName, tests))
+
+print(test)
+
 
 
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
@@ -35,13 +60,16 @@ def get_recommend_top():
 
     try:
         happy_list = list(movieList.find({"genre": "신남"}, {"_id": False}))
+
+        # scoreCut = happy_list(map(cutScore(),))
+        # if scoreCut > 5.00 :
+
         today_happy = random.sample(happy_list, 1)[0]
-        
         happy_title = today_happy["title"]
         happy_img = today_happy["img_url"]
         recommend_top.append(happy_title)
         recommend_top.append(happy_img)
-        
+
         angry_list = list(movieList.find({"genre": "화남"}, {"_id": False}))
         today_angry = random.sample(angry_list, 1)[0]        
         angry_title = today_angry["title"]
