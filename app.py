@@ -40,15 +40,13 @@ def detail():
     return render_template("detail.html")
 
 tests = list(movieList.find({'genre':'신남'},{'_id':False}))
-print(tests)
+# print(tests)
 
 def cutName(n) :
     score = float(n["score"])
     if score > 6 :
         return n
-test = list(map(cutName, tests))
 
-print(test)
 
 
 
@@ -60,11 +58,12 @@ def get_recommend_top():
 
     try:
         happy_list = list(movieList.find({"genre": "신남"}, {"_id": False}))
-
+        scoreCut_happy = list(map(cutName, happy_list))
+        print(scoreCut_happy)
         # scoreCut = happy_list(map(cutScore(),))
         # if scoreCut > 5.00 :
 
-        today_happy = random.sample(happy_list, 1)[0]
+        today_happy = random.sample(scoreCut_happy, 1)[0]
         happy_title = today_happy["title"]
         happy_img = today_happy["img_url"]
         recommend_top.append(happy_title)
@@ -106,6 +105,9 @@ def get_recommend_list():
         # print(genre_receive)
 
         movie_list = list(movieList.find({"genre": genre_receive}, {"_id": False}))
+        # scoreCut_movie_list = list(map(cutName, movie_list))
+        # print(scoreCut_movie_list)
+
         # print(movie_list)
 
     except Exception:
