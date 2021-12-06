@@ -5,24 +5,22 @@ body {
   color: black;
 }
 
-.boxPadding{
+.boxPadding {
   padding-left: 220px;
-
 }
 a:hover {
   text-decoration: none;
 }
-#movie-today{
+#movie-today {
   margin: 20px;
 }
-#movie-today h2{
+#movie-today h2 {
   font-size: 24px;
 }
-.title{
+.title {
   font-weight: 800;
-
 }
-.recommend-title{
+.recommend-title {
   width: 100%;
 }
 
@@ -31,14 +29,27 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom:50px;
+  margin-bottom: 50px;
   min-height: 100%;
 }
 
-.card{
+.card-main {
   text-align: center;
   margin: 20px;
   padding: 10px;
+}
+
+.card-title {
+  font-size: 1.2rem !important;
+}
+
+.movie-card {
+  width: fit-content !important;
+  box-shadow: none !important;
+}
+
+.card-mg {
+  margin: 0 !important;
 }
 
 .header-logo {
@@ -53,11 +64,11 @@ main {
   justify-content: center;
   margin: 20px;
 }
-#movie-recommend-title{
+#movie-recommend-title {
   margin: 20px;
 }
 
-.movie-recommend-item{
+.movie-recommend-item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,7 +85,6 @@ main {
   text-align: center;
   display: flex;
   flex-direction: column;
-  margin: 40px auto;
 }
 
 .headline {
@@ -111,7 +121,8 @@ main {
   align-items: center;
 }
 
-#movie-list {
+#movie-list,
+#movie-list-all {
   display: flex;
   flex-wrap: wrap;
 
@@ -129,6 +140,7 @@ main {
 
 .poster {
   width: 200px;
+  height: 240px;
   padding: 10px;
 }
 
@@ -140,28 +152,27 @@ main {
 /* img:hover {
   cursor: pointer;
 } */
-input:hover{
+input:hover {
   cursor: default;
 }
 
-#movie_detail{
+#movie_detail {
   width: 100%;
 }
 
-.content{
+.content {
   min-height: 100%;
 }
 
-.detail{
+.detail {
   min-height: 100px;
   margin-top: 15px;
   padding: 15px;
   margin: 20px;
 }
 
-.footer{
+.footer {
   left: 0;
   bottom: 0;
   position: relative;
-
 }
