@@ -1,24 +1,23 @@
-let title = localStorage.getItem('title')
-  console.log(title)
+let title = localStorage.getItem("title");
+// console.log(title)
 
-  $.ajax({
-    type: "POST",
-    url: "/find",
-    data: { title_give: title},
-    success: function (response) {
+$.ajax({
+  type: "POST",
+  url: "/find",
+  data: { title_give: title },
+  success: function (response) {
+    let movie_data = response["movie_data"];
+    console.log(movie_data);
 
-      let movie_data = response["movie_data"]
-      console.log(movie_data);
+    let poster = movie_data["img_url"];
+    // console.log(poster);
+    let title = movie_data["title"];
+    let score = movie_data["score"];
+    let desc = movie_data["desc"];
+    let url = movie_data["url"];
+    let genre = movie_data["genre"];
 
-      let poster = movie_data["img_url"];
-      // console.log(poster);
-      let title = movie_data["title"];
-      let score = movie_data["score"];
-      let desc  = movie_data["desc"];
-      let url = movie_data["url"];
-      let genre = movie_data["genre"];
-
-      let temp_html =`<div class="content detail">
+    let temp_html = `<div class="content detail">
                             <input type="image" src="${poster}" width="202" height="290" style="float: left"/>
                             <div class="boxPadding">
                             <h1>${title}</h1>
@@ -29,9 +28,8 @@ let title = localStorage.getItem('title')
                             <P>${desc}</P>
                           </div>
                           </div>
-                          `
+                          `;
 
-      $("#movie_detail").append(temp_html);
-    },
-  });
-
+    $("#movie_detail").append(temp_html);
+  },
+});

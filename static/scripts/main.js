@@ -8,7 +8,6 @@ function getRecommendList() {
     url: "/recommend/top",
     data: {},
     success: function (response) {
-      
       let recommendList = response["recommendTop"];
       let happyTitle = recommendList[0];
       let happyImg = recommendList[1];
@@ -48,7 +47,6 @@ function getMovieList(genre) {
     url: "/recommend/list",
     data: { genre_name: genre },
     success: function (response) {
-      
       let movieList = response["movie_list"];
 
       for (let i = 0; i < movieList.length; i++) {
@@ -57,7 +55,7 @@ function getMovieList(genre) {
         let score = movieList[i]["score"];
 
         let movie_item = `<div class="column is-one-quarter">
-                              <div class="card">
+                              <div class="card card-main">
                                 <a href="/detail" onclick="getMovieInfo('${title}')"><img src="${poster}" class="card-img poster" alt="poster"></a>
                                 <div class="card-body">
                                   <p class="card-text">
@@ -69,9 +67,9 @@ function getMovieList(genre) {
                             </div>`;
 
         $("#movie-list").append(movie_item);
-        
-    }
-  }});
+      }
+    },
+  });
 
   showList();
 }
@@ -90,5 +88,5 @@ function showList() {
 }
 
 function getMovieInfo(title) {
-  localStorage.setItem('title', title);
+  localStorage.setItem("title", title);
 }
