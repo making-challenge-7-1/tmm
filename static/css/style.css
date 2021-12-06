@@ -8,6 +8,10 @@ body {
 .boxPadding {
   padding-left: 220px;
 }
+.button-submit{
+  margin-top: 10px;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -177,3 +181,4 @@ input:hover {
   bottom: 0;
   position: relative;
 }
+

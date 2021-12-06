@@ -13,7 +13,6 @@ db = client.dbsparta
 
 movieList = db.tp7
 review = db.review
-logInfo = db.register
 
 app.secret_key = "ABCDEFG"
 
@@ -22,52 +21,18 @@ app.secret_key = "ABCDEFG"
 def init():
     return render_template("index.html")
 
-# register(회원가입)
+# register page view(회원가입)
 @app.route("/register")
-def register_get():
+def register():
     return render_template("register.html")
 
-# save to db
-@app.route("/register", methods=["POST"])
-def register_post():
-    # try:
-    ID_receive = request.form["ID_give"]
-    password_receive = request.form["password_give"]
-    logDB = logInfo.find_one({'ID':ID_receive}, {'_id':False})
-    print(logDB)
-    if logDB is not None:
-        return jsonify({'msg':'이미 존재하는 아이디입니다.'})
-    if logDB == None:
-        doc = {'ID': ID_receive,
-               'password': password_receive}
-        logInfo.insert_one(doc)
-    # except Exception as e:
-    #     return {"message": "failed to search"}, 401
-
-    return jsonify({'msg':'저장이 완료되었습니다.'})
-
-
-# login(로그인)
+# login page view(로그인)
 @app.route("/login")
 def login():
     return render_template("login.html")
 
-@app.route("/logIn/check", methods=["POST"])
-def check_logInfo():
 
-    try:
-        ID_receive = request.form["ID_give"]
-        password_receive = request.form["password_give"]
-        print(ID_receive,password_receive)
-
-        target = logInfo.find_one({"ID": ID_receive}, {"_id": False})
-        print(target)
-
-    except Exception as e:
-        return {"message": "failed to search"}, 401
-
-    return jsonify({"logIn_info": target})
-
+# all movie list view
 @app.route("/movies", methods=["GET"])
 def movie_list():
     return render_template("movies.html")
@@ -79,26 +44,67 @@ def detail():
     return render_template("detail.html")
 
 
-# # get reviews
-# @app.route("/reviews", methods=["GET"])
-# def get_reviews():
-#     reviews = list(db.reviews.find({}, {"_id": False}))
-#     return jsonify({'target_reviews': reviews})
+# 회원가입 진행(db에 저장)
+@app.route("/sign_up", methods=["POST"])
+def sign_up():
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+
+    doc ={  
+        'username' : username_receive,           
+        'password': password_receive}
+    db.users.insert_one(doc)
+
+    return jsonify({'msg':'저장이 완료되었습니다'})
+
+
+# id 중복 검사
+@app.route('/sign_up/id_check', methods=['POST'])
+def id_check():
+    username_receive = request.form['username_give']
+    exists = bool(db.users.find_one({"username": username_receive}))
+    return jsonify({'result': 'success', 'exists': exists})
+
+
+# 로그인
+@app.route("/sign_in", methods=["POST"])
+def sign_in():
+    
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+
+    print(username_receive, password_receive)
+
+    result = db.users.find_one({'username': username_receive, 'password': password_receive})
+
+    if result is not None:
+
+        return jsonify({'result': 'success', 'msg': "로그인 성공"})
+    # 찾지 못하면
+    else:
+        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+
+
+@app.route("/reviews", methods=["GET"])
+def get_reviews():
+    reviews = list(db.reviews.find({}, {"_id": False}))
+    return jsonify({'target_reviews': reviews})
+
 
 #update reviews
-    # @app.route("/reviews/update", methods=["POST"])
-    # def update_reviews():
-    #     title_receive = request.form['title_give']
-    #     writer_receive = request.form['writer_give']
-    #     review_receive = request.form['review_give']
+@app.route("/reviews/update", methods=["POST"])
+def update_reviews():
+    title_receive = request.form['title_give']
+    writer_receive = request.form['writer_give']
+    review_receive = request.form['review_give']
 
-    # doc = {
-    #     "movie": movie_receive,
-    #     "writer": writer_receive,
-    #     "review": review_receive
-    # }
-    # db.review.insert_one(doc)
-    # return
+    doc = {
+        "movie": title_receive,
+        "writer": writer_receive,
+        "review": review_receive
+    }
+    db.review.insert_one(doc)
+    return    
 
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
 @app.route("/recommend/top", methods=["GET"])
@@ -148,12 +154,10 @@ def get_recommend_top():
 def get_recommend_list():
     try:
         genre_receive = request.form["genre_name"]
-        # print(genre_receive)
 
         movie_list = list(
             movieList.find({"genre": genre_receive}, {"_id": False}).sort("score", -1)
         )
-        # print(movie_list)
 
     except Exception:
 
@@ -167,7 +171,6 @@ def get_recommend_list():
 def find_all_movie():
     try:
         movie_list_all = list(movieList.find({}, {"_id": False}).sort("score", -1))
-        # print(movie_list_all)
 
     except Exception:
 
@@ -195,3 +198,4 @@ def find_movie_detail():
 if __name__ == "__main__":
 
     app.run("0.0.0.0", port=5000, debug=True)
+
