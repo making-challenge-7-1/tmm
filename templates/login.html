@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="box" style="max-width: 480px;margin:auto">
+  <article class="media">
+    <div class="media-content">
+      <div class="content">
+
+        <div class="field">
+          <div class="control has-icons-left" style="width:100%">
+            <input id="input-username" class="input" type="text" placeholder="아이디">
+              <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+          </div>
+        </div>
+        
+        <div class="field">
+          <div class="control has-icons-left">
+            <input id="input-password" class="input" type="password" placeholder="비밀번호">
+              <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+          </div>
+        </div>
+                    
+        <div id="div-sign-in-or-up" class="has-text-centered">
+          <nav class="level is-mobile">
+            <button class="level-item button is-primary" onclick="sign_in()">Log in</button>
+          </nav>
+          <hr>
+          <h4 class="mb-3">아직 회원이 아니라면</h4>
+          <nav class="level is-mobile">
+            <button class="level-item button is-link is-outlined" onclick="to_sign_up()">Sign up</button>
+          </nav>
+        </div>
+
+      </div>          
+    </div>
+  </article>                  
+</div>
+
+  {% block javascript %}
+    <script src="./static/scripts/login.js"></script>
+  {% endblock %}
+{% endblock %}
