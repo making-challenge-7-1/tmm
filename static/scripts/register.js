@@ -21,8 +21,11 @@ function sign_up(){
         data: { ID_give: ID,
               password_give: password1 },
         success: function (response){
-        alert('테스트성공')
+          alert(response["msg"])
+          if(response["msg"] ==='이미 존재하는 아이디입니다.')return
+          location.href ="login"
+
             }
 })
-    location.href ="/"
 }
+    
