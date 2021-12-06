@@ -1,27 +1,36 @@
-function logIn(){
-  let ID = $('.inputID').val()
-  let password = $('.inputPassword').val()
-  $.ajax({
+function sign_in() {
+    let username = $("#input-username").val()
+    let password = $("#input-password").val()
+
+    if (username == "") {
+        $("#help-id-login").text("아이디를 입력해주세요.")
+        $("#input-username").focus()
+        return;
+    } else {
+        $("#help-id-login").text("")
+    }
+
+    if (password == "") {
+        $("#help-password-login").text("비밀번호를 입력해주세요.")
+        $("#input-password").focus()
+        return;
+    } else {
+        $("#help-password-login").text("")
+    }
+    $.ajax({
         type: "POST",
-        url: "/logIn/check",
-        data: {ID_give: ID, password_give:password},
-        success: function (response){
-          console.log(response)
-          if(response["logIn_info"]===null){
-            alert('ID를 확인해주세요!')
-            return
-          }
-          let log_info = response["logIn_info"]
-          let IDByDB = log_info["ID"]
-          let passwordByDB = log_info["password"]
-          if((ID === IDByDB)&&(password === passwordByDB)){
-            localStorage.setItem('ID', ID)
-          }else{
-            alert('password를 확인해주세요!')
-          }
-          if(localStorage.getItem("ID")===ID){
-            location.href = "/"
-          }
+        url: "/sign_in",
+        data: {
+            username_give: username,
+            password_give: password
+        },
+        success: function (response) {
+            if (response['result'] == 'success') {
+                $.cookie('mytoken', response['token'], {path: '/'});
+                window.location.replace("/")
+            } else {
+                alert(response['msg'])
+            }
         }
-  })
+    });
 }
