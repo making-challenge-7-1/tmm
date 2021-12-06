@@ -28,9 +28,11 @@ function sign_in() {
             password_give: password
         },
         success: function (response) {
-            // console.log(response)
+            console.log(response)
             if (response['result'] == 'success') {
+
                 window.location.replace("/")
+                localStorage.setItem("username", username);
             } else {
                 alert(response['msg'])
             }
