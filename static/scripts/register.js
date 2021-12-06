@@ -94,7 +94,6 @@ function sign_up(){
     
 }
 
-
 function go_home(){
     window.location.replace("/")
 }
