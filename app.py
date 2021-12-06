@@ -9,8 +9,9 @@ client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
 db = client.dbsparta
 
 # client = MongoClient("localhost", 27017)
-
 # db = client.dbMovie
+
+
 movieList = db.tp7
 review = db.review
 
@@ -22,23 +23,27 @@ def init():
     return render_template("index.html")
 
 # register(회원가입)
-@app.route("/register", methods =["POST"])
+
+@app.route("/register")
 def register():
-    
-    email_receive = request.form["email_give"]
-    password_receive = request.form["password_give"]
-    
-    doc ={'email': email_receive,
-        'password': password_receive}
-    db.register.insert_one(doc)
-    
-    
     return render_template("register.html")
+
+
+@app.route("/register", methods=["POST"])
+def sign_up():
+    ID_receive = request.form["ID_give"]
+    password_receive = request.form["password_give"]
+
+    doc ={'id' : ID_receive,
+          'password': password_receive}
+    db.register.insert_one(doc)
+
+    return jsonify({'msg':'저장이 완료되었습니다'})
+
 
 # login(로그인)
 @app.route("/login")
 def login():
-    
     return render_template("login.html")
 
 
@@ -52,8 +57,6 @@ def movie_list():
 def detail():
     return render_template("detail.html")
 
-
-# get reviews
 @app.route("/reviews", methods=["GET"])
 def get_reviews():
     reviews = list(db.reviews.find({}, {"_id": False}))
