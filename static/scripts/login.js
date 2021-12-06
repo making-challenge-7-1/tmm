@@ -1,45 +1,27 @@
-function sign_in() {
-    let username = $("#input-username").val()
-    let password = $("#input-password").val()
-
-    if (username == "") {
-        $("#help-id-login").text("아이디를 입력해주세요.")
-        $("#input-username").focus()
-    return;
-    } else {
-        $("#help-id-login").text("")
-    }
-
-    if (password == "") {
-        $("#help-password-login").text("비밀번호를 입력해주세요.")
-        $("#input-password").focus()
-    return;
-    } else {
-        $("#help-password-login").text("")
-    }
-
-    console.log(username, password)
-
-    $.ajax({ 
+function logIn(){
+  let ID = $('.inputID').val()
+  let password = $('.inputPassword').val()
+  $.ajax({
         type: "POST",
-        url: "/sign_in",
-        data: {
-            username_give: username,
-            password_give: password
-        },
-        success: function (response) {
-            console.log(response)
-            if (response['result'] == 'success') {
-
-                window.location.replace("/")
-                localStorage.setItem("username", username);
-            } else {
-                alert(response['msg'])
-            }
+        url: "/logIn/check",
+        data: {ID_give: ID, password_give:password},
+        success: function (response){
+          console.log(response)
+          if(response["logIn_info"]===null){
+            alert('ID를 확인해주세요!')
+            return
+          }
+          let log_info = response["logIn_info"]
+          let IDByDB = log_info["ID"]
+          let passwordByDB = log_info["password"]
+          if((ID === IDByDB)&&(password === passwordByDB)){
+            localStorage.setItem('ID', ID)
+          }else{
+            alert('password를 확인해주세요!')
+          }
+          if(localStorage.getItem("ID")===ID){
+            location.href = "/"
+          }
         }
-    });
-}
-
-function to_sign_up() {
-    window.location.href="/register"
+  })
 }
