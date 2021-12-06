@@ -6,7 +6,10 @@ function sign_up(){
         url: "/register",
         data: { email_give: email,
               password_give: password },
-        success: function (response)
-        console.log(response)
+        success: function (response){
+            console.log(response)
+        }
+    })
+
 }
 

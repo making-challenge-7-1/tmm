@@ -8,6 +8,9 @@ body {
 .boxPadding {
   padding-left: 220px;
 }
+.button{
+  margin-top: 10px;
+}
 a:hover {
   text-decoration: none;
 }
