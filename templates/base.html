@@ -83,10 +83,16 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
+                {% if username != null %}
+                <a class="button is-light" href="/login"> Log out </a>
+
+                {% else %}
                 <a class="button is-primary" href="/register">
                   <strong>Sign up</strong>
                 </a>
                 <a class="button is-light" href="/login"> Log in </a>
+                {% endif %}
+                
               </div>
             </div>
           </div>
@@ -108,5 +114,8 @@
         </p>
       </div>
     </footer>
+    <script>
+      let username = localStorage.getItem("username");
+    </script>
   </body>
 </html>
