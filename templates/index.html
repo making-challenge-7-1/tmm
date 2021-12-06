@@ -1,27 +1,37 @@
 {% extends "base.html" %}
 {% block main %}
-<div id="movie-today">
-    <h2>Today's Pick</h2>
-</div>
+
 <div id="movie-recommend">
-    <div class="columns movie-recommend-list">
-        <div class="column">
+  <div id="movie-recommend-title">
+  {# <h2 class="title">이런 영화는 어떠세요?</h2> #}
+  {# <h2 class="title">오늘의 추천 영화</h2> #}
+  <h2 class="title">Today's Recommend</h2>
+  {# <h2 class="title">Woong's Pick</h2> #}
+  
+  {# <h2 class="title">Recommed Movies</h2> #}
+  
+  
+  
+  </div>
+  
+  <div class="columns movie-recommend-list">
+        <div class="column is-one-quarter movie-recommend-item">
             <div id="head-happy" class="movie-card-head">
             </div>
         </div>
-        <div class="column">
+        <div class="column is-one-quarter movie-recommend-item">
             <div id="head-angry" class="movie-card-head">
             </div>
         </div>
-        <div class="column">
+        <div class="column is-one-quarter movie-recommend-item">
             <div id="head-sad" class="movie-card-head">
             </div>
         </div>
-        <div class="column">
+        <div class="column is-one-quarter movie-recommend-item">
             <div id="head-move" class="movie-card-head">
             </div>
         </div>
-    </div>
+  </div>  
 </div>
 
 <div class="feeling">
@@ -35,26 +45,26 @@
   <ul>
     <li>
       <a href="#movie-list"  onclick="getMovieList('신남')">
-        <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+        <span class="icon is-small"><i class="far fa-smile aria-hidden="true""></i></span>
         <span>신남</span>
       </a>
     </li>
     <li>
       <a href="#movie-list"  onclick="getMovieList('화남')">
-        <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+        <span class="icon is-small"><i class="far fa-angry" aria-hidden="true"></i></span>
         <span>화남</span>
       </a>
     </li>
     <li>
       <a href="#movie-list"  onclick="getMovieList('우울')">
-        <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+        <span class="icon is-small"><i class="far fa-sad-cry" aria-hidden="true"></i></span>
         <span>우울</span>
       </a>
     </li>
     <li>
       <a href="#movie-list"  onclick="getMovieList('떠남')">
-        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
-        <span>여행</span>
+        <span class="icon is-small"><i class="far fa-meh" aria-hidden="true"></i></span>
+        <span>떠남</span>
       </a>
     </li>
   </ul>
@@ -65,8 +75,6 @@
 
 <!-- custom script -->
     {% block javascript %} 
-        <script src="./static/scripts/main.js"></script>
-        <script src="./static/scripts/detail.js"></script>
-{# <script src="./static/scripts/detail.js"></script> #}
-        {% endblock %}
+        <script src="./static/scripts/main.js"></script>    
+    {% endblock %}
 {% endblock %}
