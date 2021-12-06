@@ -17,9 +17,6 @@ function sign_in() {
     } else {
         $("#help-password-login").text("")
     }
-    
-    console.log(username, password)
-
     $.ajax({
         type: "POST",
         url: "/sign_in",
@@ -28,18 +25,12 @@ function sign_in() {
             password_give: password
         },
         success: function (response) {
-            console.log(response)
             if (response['result'] == 'success') {
-
+                $.cookie('mytoken', response['token'], {path: '/'});
                 window.location.replace("/")
-                localStorage.setItem("username", username);
             } else {
                 alert(response['msg'])
             }
         }
     });
-}
-
-function to_sign_up() {
-    window.location.href="/register"
 }
