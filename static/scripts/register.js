@@ -85,7 +85,7 @@ function sign_up(){
         type: "POST",
         url: "/sign_up",
         data: { username_give: username,
-                password_give: password1 },
+                password_give: password },
         success: function (){
             alert('회원가입을 축하드립니다!')
             window.location.replace("/login")
