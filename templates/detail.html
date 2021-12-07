@@ -2,26 +2,45 @@
 
 <div id="movie_detail" class="content is-medium"></div>
 
-    <textarea class="textarea" placeholder="리뷰를 남겨주세요."></textarea>
-    <button class="button button-submit">Submit</button>
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="https://bulma.io/images/placeholders/128x128.png" />
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="field">
+      <p class="control">
+        <textarea class="textarea" placeholder="리뷰를 남겨주세요."></textarea>
+      </p>
+    </div>
+    <div class="field">
+      <p class="control">
+        <button class="button">Submit</button>
+      </p>
+    </div>
+  </div>
+</article>
 
-    <table class="table">
-  <thead>
-    <tr>
-      <th>번호</th>
-      <th>ID</th>
-      <th>review</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>ID1</td>
-      <td>review1</td>
-    </tr>
-  </tbody>
-</table>
-
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="https://bulma.io/images/placeholders/128x128.png" />
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong>ID</strong>
+        <br />
+        content
+      </p>
+    </div>
+  </div>
+  <div class="media-right">
+    <button class="delete"></button>
+  </div>
+</article>
 
 <!-- custom script -->
 {% block javascript %}

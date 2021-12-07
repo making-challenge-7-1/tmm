@@ -91,7 +91,7 @@ def sign_in():
 # 로그아웃
 @app.route("/logout", methods=["GET"])
 def logout():
-    session.pop("user_id", None)
+    session.pop("username", None)
     return redirect(url_for("init"))
 
 
