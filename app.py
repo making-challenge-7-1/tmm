@@ -95,9 +95,10 @@ def logout():
     return redirect(url_for("init"))
 
 
-@app.route("/reviews", methods=["GET"])
+@app.route("/reviews", methods=["POST"])#해당 영화 조회를 하기위해 post로 바꿨습니다.
 def get_reviews():
-    reviews = list(db.reviews.find({}, {"_id": False}))
+    title_receive = request.form["title_give"]
+    reviews = list(db.review.find({"title": title_receive}, {"_id": False}))#title로 review 조회
     return jsonify({"target_reviews": reviews})
 
 
@@ -105,12 +106,12 @@ def get_reviews():
 @app.route("/reviews/update", methods=["POST"])
 def update_reviews():
     title_receive = request.form["title_give"]
-    writer_receive = request.form["writer_give"]
+    ID_receive = request.form["ID_give"]
     review_receive = request.form["review_give"]
 
-    doc = {"movie": title_receive, "writer": writer_receive, "review": review_receive}
+    doc = {"movie": title_receive, "ID": ID_receive, "review": review_receive}#title, id, review로 저장
     db.review.insert_one(doc)
-    return
+    return jsonify({"msg": "등록 완료"})
 
 
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
