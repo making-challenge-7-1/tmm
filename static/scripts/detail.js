@@ -1,5 +1,4 @@
 let title = localStorage.getItem("title");
-// console.log(title)
 
 $.ajax({
   type: "POST",

@@ -58,7 +58,7 @@
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
-            <img src="./static/images/logo.png" width="122" />
+            <img src="./static/images/image.png" width="122" />
           </a>
 
           <a
@@ -83,16 +83,15 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                {% if username != null %}
-                <a class="button is-light" href="/login"> Log out </a>
-
+                {% if session['username'] %}
+                <h2>user 님, 환영합니다.</h2>
+                <a class="button is-light" href="/logout"> Log out </a>
                 {% else %}
                 <a class="button is-primary" href="/register">
                   <strong>Sign up</strong>
                 </a>
                 <a class="button is-light" href="/login"> Log in </a>
                 {% endif %}
-                
               </div>
             </div>
           </div>
@@ -114,8 +113,5 @@
         </p>
       </div>
     </footer>
-    <script>
-      let username = localStorage.getItem("username");
-    </script>
   </body>
 </html>
