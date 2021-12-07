@@ -11,7 +11,26 @@ body {
 .button-submit {
   margin-top: 10px;
 }
-
+#review {
+	position: relative;
+	background: #0575e6;
+	border-radius: .4em;
+    padding: 10px;
+}
+#review:after {
+	content: '';
+	position: absolute;
+	left: 5px;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #0575e6;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -10px;
+	margin-left: -20px;
+}
 a:hover {
   text-decoration: none;
 }
