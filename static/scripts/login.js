@@ -9,7 +9,7 @@ function sign_in() {
   } else {
     $("#help-id-login").text("");
   }
-
+  
   if (password == "") {
     $("#help-password-login").text("비밀번호를 입력해주세요.");
     $("#input-password").focus();
