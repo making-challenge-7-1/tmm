@@ -13,7 +13,7 @@ body {
 }
 #review {
 	position: relative;
-	background: #0575e6;
+	background: #00aabb;
 	border-radius: .4em;
     padding: 10px;
 }
@@ -25,7 +25,7 @@ body {
 	width: 0;
 	height: 0;
 	border: 20px solid transparent;
-	border-right-color: #0575e6;
+	border-right-color: #00aabb;
 	border-left: 0;
 	border-bottom: 0;
 	margin-top: -10px;
