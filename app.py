@@ -111,7 +111,7 @@ def update_reviews():
 
     doc = {"movie": title_receive, "ID": ID_receive, "review": review_receive}#title, id, review로 저장
     db.review.insert_one(doc)
-    return
+    return jsonify({"msg": "등록 완료"})
 
 
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
