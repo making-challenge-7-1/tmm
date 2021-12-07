@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 from pymongo import MongoClient
 
 import random
@@ -21,10 +21,12 @@ app.secret_key = "ABCDEFG"
 def init():
     return render_template("index.html")
 
+
 # register page view(회원가입)
 @app.route("/register")
 def register():
     return render_template("register.html")
+
 
 # login page view(로그인)
 @app.route("/login")
@@ -47,64 +49,69 @@ def detail():
 # 회원가입 진행(db에 저장)
 @app.route("/sign_up", methods=["POST"])
 def sign_up():
-    username_receive = request.form['username_give']
-    password_receive = request.form['password_give']
+    username_receive = request.form["username_give"]
+    password_receive = request.form["password_give"]
 
-    doc ={  
-        'username' : username_receive,           
-        'password': password_receive}
+    doc = {"username": username_receive, "password": password_receive}
     db.users.insert_one(doc)
 
-    return jsonify({'msg':'저장이 완료되었습니다'})
+    return jsonify({"msg": "저장이 완료되었습니다"})
 
 
 # id 중복 검사
-@app.route('/sign_up/id_check', methods=['POST'])
+@app.route("/sign_up/id_check", methods=["POST"])
 def id_check():
-    username_receive = request.form['username_give']
+    username_receive = request.form["username_give"]
     exists = bool(db.users.find_one({"username": username_receive}))
-    return jsonify({'result': 'success', 'exists': exists})
+    return jsonify({"result": "success", "exists": exists})
 
 
 # 로그인
 @app.route("/sign_in", methods=["POST"])
 def sign_in():
-    
-    username_receive = request.form['username_give']
-    password_receive = request.form['password_give']
+
+    username_receive = request.form["username_give"]
+    password_receive = request.form["password_give"]
 
     print(username_receive, password_receive)
 
-    result = db.users.find_one({'username': username_receive, 'password': password_receive})
+    result = db.users.find_one(
+        {"username": username_receive, "password": password_receive}
+    )
 
     if result is not None:
+        session["username"] = result.get("username")
 
-        return jsonify({'result': 'success', 'msg': "로그인 성공"})
+        return jsonify({"result": "success", "msg": "로그인 성공"})
     # 찾지 못하면
     else:
-        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+        return jsonify({"result": "fail", "msg": "아이디/비밀번호가 일치하지 않습니다."})
+
+
+# 로그아웃
+@app.route("/logout", methods=["GET"])
+def logout():
+    session.pop("user_id", None)
+    return redirect(url_for("init"))
 
 
 @app.route("/reviews", methods=["GET"])
 def get_reviews():
     reviews = list(db.reviews.find({}, {"_id": False}))
-    return jsonify({'target_reviews': reviews})
+    return jsonify({"target_reviews": reviews})
 
 
-#update reviews
+# update reviews
 @app.route("/reviews/update", methods=["POST"])
 def update_reviews():
-    title_receive = request.form['title_give']
-    writer_receive = request.form['writer_give']
-    review_receive = request.form['review_give']
+    title_receive = request.form["title_give"]
+    writer_receive = request.form["writer_give"]
+    review_receive = request.form["review_give"]
 
-    doc = {
-        "movie": title_receive,
-        "writer": writer_receive,
-        "review": review_receive
-    }
+    doc = {"movie": title_receive, "writer": writer_receive, "review": review_receive}
     db.review.insert_one(doc)
-    return    
+    return
+
 
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
 @app.route("/recommend/top", methods=["GET"])
@@ -198,4 +205,3 @@ def find_movie_detail():
 if __name__ == "__main__":
 
     app.run("0.0.0.0", port=5000, debug=True)
-
