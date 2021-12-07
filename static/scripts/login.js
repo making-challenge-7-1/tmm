@@ -26,11 +26,17 @@ function sign_in() {
         },
         success: function (response) {
             if (response['result'] == 'success') {
-                $.cookie('mytoken', response['token'], {path: '/'});
-                window.location.replace("/")
+                window.location.replace("/");
+                console.log(username);
+                userLogin(username);
+
             } else {
-                alert(response['msg'])
+                alert(response['msg']);
             }
         }
     });
 }
+
+function userLogin(username) {
+    localStorage.setItem("username", username);
+  }
