@@ -5,11 +5,11 @@ import random
 
 app = Flask(__name__)
 
-# client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
-# db = client.dbsparta
+client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
+db = client.dbsparta
 
-client = MongoClient("localhost", 27017)
-db = client.dbMovie
+# client = MongoClient("localhost", 27017)
+# db = client.dbMovie
 
 movieList = db.tp7
 review = db.review
@@ -81,7 +81,7 @@ def sign_in():
 
     if result is not None:
         session["username"] = result.get("username")
-
+        print(session)
         return jsonify({"result": "success", "msg": "로그인 성공"})
     # 찾지 못하면
     else:
@@ -91,7 +91,7 @@ def sign_in():
 # 로그아웃
 @app.route("/logout", methods=["GET"])
 def logout():
-    session.pop("user_id", None)
+    session.pop("username", None)
     return redirect(url_for("init"))
 
 
