@@ -75,6 +75,13 @@
 
 <!-- custom script -->
     {% block javascript %} 
-        <script src="./static/scripts/main.js"></script>    
+        <script src="./static/scripts/main.js"></script>
+
+        <script>
+          function getUser(){
+            let user = localStorage.getItem("username");
+            console.log(user);
+          }
+        </script>    
     {% endblock %}
 {% endblock %}
