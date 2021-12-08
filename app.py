@@ -6,11 +6,10 @@ import random
 app = Flask(__name__)
 
 # client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
+# db = client.dbsparta
+
 client = MongoClient("localhost", 27017)
-
-
-db = client.dbsparta
-# db = client.dbMovie
+db = client.dbMovie
 
 movieList = db.tp7
 review = db.review
@@ -23,7 +22,6 @@ app.secret_key = "ABCDEFG"
 @app.route("/")
 def init():
     return render_template("index.html")
-
 
 
 # register page view(회원가입)
@@ -86,7 +84,6 @@ def sign_in():
     if result is not None:
         session["username"] = result.get("username")
 
-
         return jsonify({"result": "success", "msg": "로그인 성공"})
     # 찾지 못하면
     else:
@@ -100,10 +97,12 @@ def logout():
     return redirect(url_for("init"))
 
 
-@app.route("/reviews", methods=["POST"])#해당 영화 조회를 하기위해 post로 바꿨습니다.
+@app.route("/reviews", methods=["POST"])  # 해당 영화 조회를 하기위해 post로 바꿨습니다.
 def get_reviews():
     title_receive = request.form["title_give"]
-    reviews = list(db.review.find({"title": title_receive}, {"_id": False}))#title로 review 조회
+    reviews = list(
+        db.review.find({"title": title_receive}, {"_id": False})
+    )  # title로 review 조회
     return jsonify({"target_reviews": reviews})
 
 
@@ -115,7 +114,11 @@ def update_reviews():
     ID_receive = request.form["ID_give"]
     review_receive = request.form["review_give"]
 
-    doc = {"movie": title_receive, "ID": ID_receive, "review": review_receive}#title, id, review로 저장
+    doc = {
+        "movie": title_receive,
+        "ID": ID_receive,
+        "review": review_receive,
+    }  # title, id, review로 저장
     db.review.insert_one(doc)
     return jsonify({"msg": "등록 완료"})
 
@@ -180,10 +183,22 @@ def get_recommend_list():
 
 
 # get all genre movie list
-@app.route("/find/all", methods=["GET"])
-def find_all_movie():
+@app.route("/find/all/score", methods=["GET"])
+def find_all_movie_score():
     try:
         movie_list_all = list(movieList.find({}, {"_id": False}).sort("score", -1))
+
+    except Exception:
+
+        return jsonify({"error to find movies"})
+
+    return jsonify({"movie_list": movie_list_all})
+
+
+@app.route("/find/all/abc", methods=["GET"])
+def find_all_movie_abc():
+    try:
+        movie_list_all = list(movieList.find({}, {"_id": False}).sort("title", 1))
 
     except Exception:
 
@@ -213,17 +228,17 @@ def write_comment():
     try:
         comment_receive = request.form["comment_give"]
         title_receive = request.form["title_give"]
-        doc = {
-            'comment': comment_receive
-        }
-        movieList.insert_one(movieList.find_one({{"title": title_receive}, {"_id": False}}).toArray(doc))
+        doc = {"comment": comment_receive}
+        movieList.insert_one(
+            movieList.find_one({{"title": title_receive}, {"_id": False}}).toArray(doc)
+        )
     # db.B_COLLLECTION.insertMany(db.A_COLLLECTION.find({"reg_date": { $eq: '20190805'}}).toArray())
 
     except Exception as e:
-        print('error', e)
+        print("error", e)
         return {"message": "failed to search"}
 
-    return jsonify({"msg": 'comment delivery'})
+    return jsonify({"msg": "comment delivery"})
 
 
 if __name__ == "__main__":
