@@ -95,8 +95,8 @@ def logout():
     session.pop("username", None)
     return redirect(url_for("init"))
 
-
-@app.route("/comments", methods=["POST"])  # 해당 영화 조회를 하기위해 post로 바꿨습니다.
+#comment 불러오기
+@app.route("/comments", methods=["POST"])
 def get_comments():
     title_receive = request.form["title_give"]
     comments = list(
@@ -113,13 +113,19 @@ def update_comments():
     ID_receive = request.form["ID_give"]
     comment_receive = request.form["comment_give"]
 
-    doc = {
-        "title": title_receive,
-        "ID": ID_receive,
-        "comment": comment_receive,
-    }  # title, id, comment로 저장
-    db.comment.insert_one(doc)
-    return jsonify({"msg": "등록 완료"})
+    if ID_receive == "": # ID를 찾아 올 수 없는 경우
+        session.pop("username", None)
+        return jsonify({"msg": "로그인을 다시 해주세요"})
+    elif comment_receive == "": # comment가 없는 경우
+        return jsonify({"msg": "내용을 작성해주세요"})
+    else:
+        doc = {
+            "title": title_receive,
+            "ID": ID_receive,
+            "comment": comment_receive,
+        }  # title, ID, comment로 저장
+        db.comment.insert_one(doc)
+        return jsonify({"msg": "등록 완료"})
 
 
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
