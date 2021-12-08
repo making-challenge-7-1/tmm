@@ -5,11 +5,11 @@ import random
 
 app = Flask(__name__)
 
-client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
-db = client.dbsparta
+# client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
+# db = client.dbsparta
 
-# client = MongoClient("localhost", 27017)
-# db = client.dbMovie
+client = MongoClient("localhost", 27017)
+db = client.dbMovie
 
 movieList = db.tp7
 review = db.review
