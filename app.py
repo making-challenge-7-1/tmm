@@ -5,21 +5,25 @@ import random
 
 app = Flask(__name__)
 
-client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
-db = client.dbsparta
+# client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
+client = MongoClient("localhost", 27017)
 
-# client = MongoClient("localhost", 27017)
+
+db = client.dbsparta
 # db = client.dbMovie
 
 movieList = db.tp7
 review = db.review
 
+
 app.secret_key = "ABCDEFG"
+
 
 # main page view
 @app.route("/")
 def init():
     return render_template("index.html")
+
 
 
 # register page view(회원가입)
@@ -82,6 +86,7 @@ def sign_in():
     if result is not None:
         session["username"] = result.get("username")
 
+
         return jsonify({"result": "success", "msg": "로그인 성공"})
     # 찾지 못하면
     else:
@@ -91,7 +96,7 @@ def sign_in():
 # 로그아웃
 @app.route("/logout", methods=["GET"])
 def logout():
-    session.pop("user_id", None)
+    session.pop("username", None)
     return redirect(url_for("init"))
 
 
@@ -105,6 +110,7 @@ def get_reviews():
 # update reviews
 @app.route("/reviews/update", methods=["POST"])
 def update_reviews():
+
     title_receive = request.form["title_give"]
     ID_receive = request.form["ID_give"]
     review_receive = request.form["review_give"]
@@ -117,7 +123,6 @@ def update_reviews():
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
 @app.route("/recommend/top", methods=["GET"])
 def get_recommend_top():
-
     recommend_top = []
 
     try:
@@ -151,7 +156,7 @@ def get_recommend_top():
         recommend_top.append(move_img)
 
     except Exception as e:
-
+        print(recommend_top)
         return jsonify({"ERROR: fail to get top items"})
 
     return jsonify({"recommendTop": recommend_top})
@@ -203,6 +208,23 @@ def find_movie_detail():
     return jsonify({"movie_data": target})
 
 
-if __name__ == "__main__":
+@app.route("/writeComment", methods=["POST"])
+def write_comment():
+    try:
+        comment_receive = request.form["comment_give"]
+        title_receive = request.form["title_give"]
+        doc = {
+            'comment': comment_receive
+        }
+        movieList.insert_one(movieList.find_one({{"title": title_receive}, {"_id": False}}).toArray(doc))
+    # db.B_COLLLECTION.insertMany(db.A_COLLLECTION.find({"reg_date": { $eq: '20190805'}}).toArray())
 
+    except Exception as e:
+        print('error', e)
+        return {"message": "failed to search"}
+
+    return jsonify({"msg": 'comment delivery'})
+
+
+if __name__ == "__main__":
     app.run("0.0.0.0", port=5000, debug=True)
