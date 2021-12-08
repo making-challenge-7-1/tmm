@@ -11,7 +11,6 @@ $.ajax({
     console.log(movie_data);
 
     let poster = movie_data["img_url"];
-    // console.log(poster);
     let title = movie_data["title"];
     let score = movie_data["score"];
     let desc = movie_data["desc"];
@@ -44,7 +43,6 @@ $.ajax({
   success: function (response) {
     let comment_data = response["target_comments"];
     console.log(comment_data);
-    // $('#comment_list').empty();
 
     for (let i = 0; i < comment_data.length; i++) {
       let ID = comment_data[i]["ID"]
@@ -78,15 +76,18 @@ $.ajax({
 });
 
 function add_comment() {
-  // console.log("button clicked");
   let comment = $('#new-post').val()
   $.ajax({
     type: "POST",
     url: "/comments/update",
     data: {title_give: title, ID_give: ID, comment_give: comment},
     success: function (response) {
+      if (response["msg"] == "내용을 작성해주세요"){ //내용이 없을경우
+        alert(response["msg"])
+      }else { //ID가 없을경우 등록 안됨 but 모두 충족시 정상 작동
       alert(response["msg"]);
       window.location.reload();
+      };
     }
   })
 }
