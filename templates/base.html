@@ -84,7 +84,7 @@
             <div class="navbar-item">
               <div class="buttons">
                 {% if session['username'] %}
-                <h2>user 님, 환영합니다.</h2>
+                <h2>{{session["username"]}} 님, 환영합니다.</h2>
                 <a class="button is-light" href="/logout"> Log out </a>
                 {% else %}
                 <a class="button is-primary" href="/register">
