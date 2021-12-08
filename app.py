@@ -10,12 +10,13 @@ app = Flask(__name__)
 
 client = MongoClient("localhost", 27017)
 db = client.dbMovie
+# db = client.dbsparta
 
 movieList = db.tp7
-comments = db.comments
+comment = db.comment
 
 
-app.secret_key = "WFILX"
+app.secret_key = "ABCDEFG"
 
 
 # main page view
@@ -82,7 +83,7 @@ def sign_in():
     if result is not None:
         session["username"] = result.get("username")
 
-        return jsonify({"result": "success", "msg": "로그인 성공"})
+        return jsonify({"result": "success", "msg": "로그인 성공", "username": username_receive}) #username = sessionstorage에 저장 될 예정
     # 찾지 못하면
     else:
         return jsonify({"result": "fail", "msg": "아이디/비밀번호가 일치하지 않습니다."})
@@ -93,6 +94,32 @@ def sign_in():
 def logout():
     session.pop("username", None)
     return redirect(url_for("init"))
+
+
+@app.route("/comments", methods=["POST"])  # 해당 영화 조회를 하기위해 post로 바꿨습니다.
+def get_comments():
+    title_receive = request.form["title_give"]
+    comments = list(
+        db.comment.find({"title": title_receive}, {"_id": False})
+    )  # title로 comment 조회
+    return jsonify({"target_comments": comments})
+
+
+# update comments
+@app.route("/comments/update", methods=["POST"])
+def update_comments():
+
+    title_receive = request.form["title_give"]
+    ID_receive = request.form["ID_give"]
+    comment_receive = request.form["comment_give"]
+
+    doc = {
+        "title": title_receive,
+        "ID": ID_receive,
+        "comment": comment_receive,
+    }  # title, id, comment로 저장
+    db.comment.insert_one(doc)
+    return jsonify({"msg": "등록 완료"})
 
 
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
@@ -180,11 +207,14 @@ def find_all_movie_abc():
 
 
 # get movie detail
-@app.route("/find/detail", methods=["POST"])
+@app.route("/find", methods=["POST"])
 def find_movie_detail():
     try:
         title_receive = request.form["title_give"]
+        print(title_receive)
+
         target = movieList.find_one({"title": title_receive}, {"_id": False})
+        print(target)
 
     except Exception as e:
         return {"message": "failed to search"}, 401
@@ -192,52 +222,24 @@ def find_movie_detail():
     return jsonify({"movie_data": target})
 
 
-#영화에 대한 코멘트 가져오기
-@app.route("/comments/read", methods=["POST"])  # 해당 영화 조회를 하기위해 post로 바꿨습니다.
-def get_reviews():
-    title_receive = request.form["title_give"]
-    reviews = list(
-        comments.find({"title": title_receive}, {"_id": False})
-    )  # title로 review 조회
-    return jsonify({"target_reviews": reviews})
-
-
-#새 코멘트 db에 저장    
-@app.route("/comments/write", methods=["POST"])
-def write_comment():
-    try:
-        username_receive = request.form["username_give"]
-        comment_receive = request.form["comment_give"]
-        title_receive = request.form["title_give"]
-        target = {
-            "title": title_receive,
-            "username": username_receive, 
-            "comment": comment_receive,
-        }
-        comments.insert_one(target)
-
-    except Exception as e:
-        return {"message": "failed to search"}, 401
-
-    return jsonify({"comment_data": target, "msg": "comment delivery"})
-
-
-# # comment 수정
-# @app.route("/reviews/update", methods=["POST"])
-# def update_reviews():
-
-#     title_receive = request.form["title_give"]
-#     ID_receive = request.form["ID_give"]
-#     review_receive = request.form["review_give"]
-
-#     doc = {
-#         "movie": title_receive,
-#         "ID": ID_receive,
-#         "review": review_receive,
-#     }  # title, id, review로 저장
-#     db.review.insert_one(doc)
-#     return jsonify({"msg": "등록 완료"})
-
+# #새 코멘트 db에 저장
+# @app.route("/comments/write", methods=["POST"])
+# def write_comment():
+#     try:
+#         username_receive = request.form["username_give"]
+#         comment_receive = request.form["comment_give"]
+#         title_receive = request.form["title_give"]
+#         target = {
+#             "title": title_receive,
+#             "username": username_receive,
+#             "comment": comment_receive,
+#         }
+#         comments.insert_one(target)
+#
+#     except Exception as e:
+#         return {"message": "failed to search"}, 401
+#
+#     return jsonify({"comment_data": target, "msg": "comment delivery"})
 
 
 if __name__ == "__main__":
