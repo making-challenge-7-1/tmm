@@ -26,7 +26,9 @@ function sign_in() {
     },
     success: function (response) {
       if (response["result"] == "success") {
+        alert("로그인 성공!");
         window.location.replace("/");
+        // history.back();
       } else {
         alert(response["msg"]);
       }

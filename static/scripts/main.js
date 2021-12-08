@@ -90,8 +90,3 @@ function showList() {
 function getMovieInfo(title) {
   localStorage.setItem("title", title);
 }
-
-// function logout() {
-//   window.sessionStorage.clear();
-//   location.href = "/";
-// }

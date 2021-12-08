@@ -12,10 +12,10 @@ client = MongoClient("localhost", 27017)
 db = client.dbMovie
 
 movieList = db.tp7
-review = db.review
+comments = db.comments
 
 
-app.secret_key = "ABCDEFG"
+app.secret_key = "WFILX"
 
 
 # main page view
@@ -75,8 +75,6 @@ def sign_in():
     username_receive = request.form["username_give"]
     password_receive = request.form["password_give"]
 
-    print(username_receive, password_receive)
-
     result = db.users.find_one(
         {"username": username_receive, "password": password_receive}
     )
@@ -95,32 +93,6 @@ def sign_in():
 def logout():
     session.pop("username", None)
     return redirect(url_for("init"))
-
-
-@app.route("/reviews", methods=["POST"])  # 해당 영화 조회를 하기위해 post로 바꿨습니다.
-def get_reviews():
-    title_receive = request.form["title_give"]
-    reviews = list(
-        db.review.find({"title": title_receive}, {"_id": False})
-    )  # title로 review 조회
-    return jsonify({"target_reviews": reviews})
-
-
-# update reviews
-@app.route("/reviews/update", methods=["POST"])
-def update_reviews():
-
-    title_receive = request.form["title_give"]
-    ID_receive = request.form["ID_give"]
-    review_receive = request.form["review_give"]
-
-    doc = {
-        "movie": title_receive,
-        "ID": ID_receive,
-        "review": review_receive,
-    }  # title, id, review로 저장
-    db.review.insert_one(doc)
-    return jsonify({"msg": "등록 완료"})
 
 
 # top 4 movie get 기분별 하나씩 랜덤하게 가져오기
@@ -208,14 +180,11 @@ def find_all_movie_abc():
 
 
 # get movie detail
-@app.route("/find", methods=["POST"])
+@app.route("/find/detail", methods=["POST"])
 def find_movie_detail():
     try:
         title_receive = request.form["title_give"]
-        print(title_receive)
-
         target = movieList.find_one({"title": title_receive}, {"_id": False})
-        print(target)
 
     except Exception as e:
         return {"message": "failed to search"}, 401
@@ -223,22 +192,52 @@ def find_movie_detail():
     return jsonify({"movie_data": target})
 
 
-@app.route("/writeComment", methods=["POST"])
+#영화에 대한 코멘트 가져오기
+@app.route("/comments/read", methods=["POST"])  # 해당 영화 조회를 하기위해 post로 바꿨습니다.
+def get_reviews():
+    title_receive = request.form["title_give"]
+    reviews = list(
+        comments.find({"title": title_receive}, {"_id": False})
+    )  # title로 review 조회
+    return jsonify({"target_reviews": reviews})
+
+
+#새 코멘트 db에 저장    
+@app.route("/comments/write", methods=["POST"])
 def write_comment():
     try:
+        username_receive = request.form["username_give"]
         comment_receive = request.form["comment_give"]
         title_receive = request.form["title_give"]
-        doc = {"comment": comment_receive}
-        movieList.insert_one(
-            movieList.find_one({{"title": title_receive}, {"_id": False}}).toArray(doc)
-        )
-    # db.B_COLLLECTION.insertMany(db.A_COLLLECTION.find({"reg_date": { $eq: '20190805'}}).toArray())
+        target = {
+            "title": title_receive,
+            "username": username_receive, 
+            "comment": comment_receive,
+        }
+        comments.insert_one(target)
 
     except Exception as e:
-        print("error", e)
-        return {"message": "failed to search"}
+        return {"message": "failed to search"}, 401
 
-    return jsonify({"msg": "comment delivery"})
+    return jsonify({"comment_data": target, "msg": "comment delivery"})
+
+
+# # comment 수정
+# @app.route("/reviews/update", methods=["POST"])
+# def update_reviews():
+
+#     title_receive = request.form["title_give"]
+#     ID_receive = request.form["ID_give"]
+#     review_receive = request.form["review_give"]
+
+#     doc = {
+#         "movie": title_receive,
+#         "ID": ID_receive,
+#         "review": review_receive,
+#     }  # title, id, review로 저장
+#     db.review.insert_one(doc)
+#     return jsonify({"msg": "등록 완료"})
+
 
 
 if __name__ == "__main__":
