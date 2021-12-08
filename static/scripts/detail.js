@@ -32,3 +32,9 @@ $.ajax({
     $("#movie_detail").append(temp_html);
   },
 });
+
+function get_comments() {}
+
+function add_comment() {
+  console.log("button clicked");
+}
