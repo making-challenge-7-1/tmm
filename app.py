@@ -12,10 +12,10 @@ client = MongoClient("localhost", 27017)
 db = client.dbMovie
 
 movieList = db.tp7
-comments = db.comments
+comment = db.comment
 
 
-app.secret_key = "WFILX"
+app.secret_key = "WFLIX"
 
 
 # main page view
@@ -39,7 +39,7 @@ def login():
 # all movie list view
 @app.route("/movies", methods=["GET"])
 def movie_list():
-    return render_template("movies.html")
+    return render_template("movielist.html")
 
 
 # detail page view
@@ -82,7 +82,9 @@ def sign_in():
     if result is not None:
         session["username"] = result.get("username")
 
-        return jsonify({"result": "success", "msg": "로그인 성공"})
+        return jsonify(
+            {"result": "success", "msg": "로그인 성공", "username": username_receive}
+        )  # username = sessionstorage에 저장 될 예정
     # 찾지 못하면
     else:
         return jsonify({"result": "fail", "msg": "아이디/비밀번호가 일치하지 않습니다."})
@@ -130,8 +132,7 @@ def get_recommend_top():
         recommend_top.append(move_title)
         recommend_top.append(move_img)
 
-    except Exception as e:
-        print(recommend_top)
+    except Exception:
         return jsonify({"ERROR: fail to get top items"})
 
     return jsonify({"recommendTop": recommend_top})
@@ -179,12 +180,32 @@ def find_all_movie_abc():
     return jsonify({"movie_list": movie_list_all})
 
 
+@app.route("/find/movie", methods=["POST"])
+def find_movie_by_title():
+    try:
+        title_receive = request.form["title_give"]
+        movie_list_all = list(
+            movieList.find({"title": {"$regex": title_receive}}, {"_id": False}).sort(
+                "title", 1
+            )
+        )
+
+    except Exception:
+
+        return jsonify({"error to find movies"})
+
+    return jsonify({"movie_list": movie_list_all})
+
+
 # get movie detail
-@app.route("/find/detail", methods=["POST"])
+@app.route("/find", methods=["POST"])
 def find_movie_detail():
     try:
         title_receive = request.form["title_give"]
+        # print(title_receive)
+
         target = movieList.find_one({"title": title_receive}, {"_id": False})
+        # print(target)
 
     except Exception as e:
         return {"message": "failed to search"}, 401
@@ -192,52 +213,54 @@ def find_movie_detail():
     return jsonify({"movie_data": target})
 
 
-#영화에 대한 코멘트 가져오기
-@app.route("/comments/read", methods=["POST"])  # 해당 영화 조회를 하기위해 post로 바꿨습니다.
-def get_reviews():
+# comment 관련 code
+
+## comment 불러오기
+@app.route("/comments", methods=["POST"])
+def get_comments():
     title_receive = request.form["title_give"]
-    reviews = list(
-        comments.find({"title": title_receive}, {"_id": False})
-    )  # title로 review 조회
-    return jsonify({"target_reviews": reviews})
+
+    # title로 comment 조회
+    comments = list(db.comment.find({"title": title_receive}, {"_id": False}))
+    return jsonify({"target_comments": comments})
 
 
-#새 코멘트 db에 저장    
-@app.route("/comments/write", methods=["POST"])
-def write_comment():
-    try:
-        username_receive = request.form["username_give"]
-        comment_receive = request.form["comment_give"]
-        title_receive = request.form["title_give"]
-        target = {
+## comment 쓰기
+@app.route("/comments/update", methods=["POST"])
+def update_comments():
+
+    title_receive = request.form["title_give"]
+    ID_receive = request.form["ID_give"]
+    comment_receive = request.form["comment_give"]
+
+    if ID_receive == "":  # ID를 찾아 올 수 없는 경우
+        session.pop("username", None)
+        return jsonify({"msg": "로그인을 다시 해주세요"})
+    elif comment_receive == "":  # comment가 없는 경우
+        return jsonify({"msg": "내용을 작성해주세요"})
+    else:
+        doc = {
             "title": title_receive,
-            "username": username_receive, 
+            "ID": ID_receive,
             "comment": comment_receive,
-        }
-        comments.insert_one(target)
-
-    except Exception as e:
-        return {"message": "failed to search"}, 401
-
-    return jsonify({"comment_data": target, "msg": "comment delivery"})
+        }  # title, ID, comment로 저장
+        db.comment.insert_one(doc)
+        return jsonify({"msg": "등록 완료"})
 
 
-# # comment 수정
-# @app.route("/reviews/update", methods=["POST"])
-# def update_reviews():
+## comment 지우기
+@app.route("/comments/delete", methods=["POST"])
+def delete_comment():
 
-#     title_receive = request.form["title_give"]
-#     ID_receive = request.form["ID_give"]
-#     review_receive = request.form["review_give"]
+    title_receive = request.form["title_give"]
+    ID_receive = request.form["ID_give"]
+    doc = {
+        "title": title_receive,
+        "ID": ID_receive,
+    }
+    db.comment.delete_one(doc)
 
-#     doc = {
-#         "movie": title_receive,
-#         "ID": ID_receive,
-#         "review": review_receive,
-#     }  # title, id, review로 저장
-#     db.review.insert_one(doc)
-#     return jsonify({"msg": "등록 완료"})
-
+    return jsonify({"msg": "삭제 완료"})
 
 
 if __name__ == "__main__":
