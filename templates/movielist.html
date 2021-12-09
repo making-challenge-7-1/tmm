@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block main %}
+
+<div id="movie-list-title" class="content">
+  <h2>ALL Movies</h2>
+</div>
+
+<div id="movie-controls" style="display: flex; flex-wrap: wrap">
+  <div id="search-movie" style="display: flex; align-items: center">
+    <input
+      id="search-movie-title"
+      class="input is-medium is-link"
+      type="text"
+      placeholder="제목을 입력하세요"
+    />
+    <button
+      class="level-item button is-link is-outlined"
+      style="margin: 0 10px"
+      onclick="search_movie()"
+    >
+      검색
+    </button>
+  </div>
+  <div
+    id="movie-sort-buttons"
+    style="display: flex; align-items: center; margin-left: 50px; float: right"
+  >
+    <button
+      class="level-item button is-info is-light"
+      style="margin: 0 10px"
+      onclick="get_movies_by_score()"
+    >
+      평점순
+    </button>
+    /
+    <button
+      class="level-item button is-info is-light"
+      style="margin: 0 10px"
+      onclick="get_movies_by_abc()"
+    >
+      가나다순
+    </button>
+  </div>
+</div>
+
+<div id="movie-list-all" class="content"></div>
+
+<!-- custom script -->
+{% block javascript %}
+<script src="./static/scripts/movielist.js"></script>
+{% endblock %} {% endblock %}

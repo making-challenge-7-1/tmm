@@ -11,55 +11,7 @@
     <h3>Comments</h3>
   </div>
 
-      <div id="comment-list">
-        <div id="comment-item" style="margin: 40px 0">
-          <article class="media">
-            <figure class="media-left" style="margin: 1rem 2rem">
-              <p class="image is-64x64">
-                <i class="fas fa-user" style="font-size: 48px"></i>
-              </p>
-            </figure>
-            <div class="media-content" id="review">
-              <div class="content">
-                <p>
-                  <strong>ID</strong>
-                  <br />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas
-                  non massa sem. Etiam finibus odio quis feugiat facilisis.
-                </p>
-              </div>
-            </div>
-            <div class="media-right">
-              <button class="delete"></button>
-            </div>
-          </article>
-        </div>
-
-        <div id="comment-item">
-          <article class="media">
-            <figure class="media-left" style="margin: 1rem 2rem">
-              <p class="image is-64x64">
-                <i class="fas fa-user" style="font-size: 48px"></i>
-              </p>
-            </figure>
-            <div class="media-content" id="review">
-              <div class="content">
-                <p>
-                  <strong>ID</strong>
-                  <br />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                  ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas
-                  non massa sem. Etiam finibus odio quis feugiat facilisis.
-                </p>
-              </div>
-            </div>
-            <div class="media-right">
-              <button class="delete"></button>
-            </div>
-          </article>
-        </div>
-      </div>
+  <div id="comment-list"></div>
 </div>
 
 <div
@@ -88,12 +40,13 @@
       <div class="field">
         <p class="control">
           <button class="button" onclick="add_comment()">리뷰 추가</button>
+          <button class="button" onclick="cancel_comment()">취소</button>
         </p>
       </div>
     </div>
   </article>
   {% else %}
-  <div style="text-align:center">
+  <div style="text-align: center">
     <h3>로그인이 필요합니다.</h3>
   </div>
   {% endif %}
