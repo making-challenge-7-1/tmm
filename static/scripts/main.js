@@ -21,13 +21,13 @@ function getRecommendList() {
       let moveTitle = recommendList[6];
       let moveImg = recommendList[7];
 
-      let happy_item = `<a href="/detail" onclick="getMovieInfo('${happyTitle}')"><figure class="image is-3by4"><img src="${happyImg}" alt="${happyTitle}"></figure></a>`;
+      let happy_item = `<a href="/detail" onclick="getMovieInfo('${happyTitle}')"><div class="movie-top"><figure class="image is-3by4"><img src="${happyImg}" alt="${happyTitle}"></figure></div></a>`;
 
-      let angry_img = `<a href="/detail" onclick="getMovieInfo('${angryTitle}')"><figure class="image is-3by4"><img src="${angryImg}" alt="${angryTitle}"></figure></a>`;
+      let angry_img = `<a href="/detail" onclick="getMovieInfo('${angryTitle}')"><div class="movie-top"><figure class="image is-3by4"><img src="${angryImg}" alt="${angryTitle}" class="poster"></figure></div></a>`;
 
-      let sad_img = `<a href="/detail" onclick="getMovieInfo('${sadTitle}')"><figure class="image is-3by4"><img src="${sadImg}" alt="${sadTitle}"></figure></a>`;
+      let sad_img = `<a href="/detail" onclick="getMovieInfo('${sadTitle}')"><div class="movie-top"><figure class="image is-3by4"><img src="${sadImg}" alt="${sadTitle}" class="poster"></figure></div></a>`;
 
-      let move_img = `<a href="/detail" onclick="getMovieInfo('${moveTitle}')"><figure class="image is-3by4"><img src="${moveImg}" alt="${moveTitle}"></figure></a>`;
+      let move_img = `<a href="/detail" onclick="getMovieInfo('${moveTitle}')"><div class="movie-top"><figure class="image is-3by4"><img src="${moveImg}" alt="${moveTitle}" class="poster"></figure></div></a>`;
 
       $("#head-happy").append(happy_item);
       $("#head-angry").append(angry_img);
@@ -38,8 +38,6 @@ function getRecommendList() {
 }
 
 function getMovieList(genre) {
-  console.log(genre);
-
   $("#movie-list").empty();
 
   $.ajax({
