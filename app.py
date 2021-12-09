@@ -139,11 +139,17 @@ def get_recommend_list():
     try:
         genre_receive = request.form["genre_name"]
 
-        movie_list = list(
+        movie_list2 = list(
             db.movieList.find({"genre": genre_receive}, {"_id": False}).sort(
                 "score", -1
             )
         )
+        movie_list = []
+        for movie in movie_list2:
+            score = movie['score']
+            score = float(score)
+            if score > 5:
+                movie_list.append(movie)
 
     except Exception:
 
