@@ -21,13 +21,13 @@ function getRecommendList() {
       let moveTitle = recommendList[6];
       let moveImg = recommendList[7];
 
-      let happy_item = `<a href="/detail" onclick="getMovieInfo('${happyTitle}')"><figure class="image is-3by4"><img src="${happyImg}" alt="${happyTitle}"></figure></a>`;
+      let happy_item = `<a href="/detail" onclick="getMovieInfo('${happyTitle}')"><div class="movie-top"><figure class="image is-3by4"><img src="${happyImg}" alt="${happyTitle}"></figure></div></a>`;
 
-      let angry_img = `<a href="/detail" onclick="getMovieInfo('${angryTitle}')"><figure class="image is-3by4"><img src="${angryImg}" alt="${angryTitle}"></figure></a>`;
+      let angry_img = `<a href="/detail" onclick="getMovieInfo('${angryTitle}')"><div class="movie-top"><figure class="image is-3by4"><img src="${angryImg}" alt="${angryTitle}" class="poster"></figure></div></a>`;
 
-      let sad_img = `<a href="/detail" onclick="getMovieInfo('${sadTitle}')"><figure class="image is-3by4"><img src="${sadImg}" alt="${sadTitle}"></figure></a>`;
+      let sad_img = `<a href="/detail" onclick="getMovieInfo('${sadTitle}')"><div class="movie-top"><figure class="image is-3by4"><img src="${sadImg}" alt="${sadTitle}" class="poster"></figure></div></a>`;
 
-      let move_img = `<a href="/detail" onclick="getMovieInfo('${moveTitle}')"><figure class="image is-3by4"><img src="${moveImg}" alt="${moveTitle}"></figure></a>`;
+      let move_img = `<a href="/detail" onclick="getMovieInfo('${moveTitle}')"><div class="movie-top"><figure class="image is-3by4"><img src="${moveImg}" alt="${moveTitle}" class="poster"></figure></div></a>`;
 
       $("#head-happy").append(happy_item);
       $("#head-angry").append(angry_img);
@@ -38,8 +38,6 @@ function getRecommendList() {
 }
 
 function getMovieList(genre) {
-  console.log(genre);
-
   $("#movie-list").empty();
 
   $.ajax({
@@ -55,16 +53,17 @@ function getMovieList(genre) {
         let score = movieList[i]["score"];
 
         let movie_item = `<div class="column is-one-quarter">
-                              <div class="card card-main">
-                                <a href="/detail" onclick="getMovieInfo('${title}')"><img src="${poster}" class="card-img poster" alt="poster"></a>
-                                <div class="card-body">
-                                  <p class="card-text">
-                                  <h3><strong>${title}</strong></h3>
-                                  <span>평점: ${score} 점</span>
-                                  </p>
-                                </div>
-                              </div>
-                            </div>`;
+                            <div class="movie-top">
+                                <a href="/detail" onclick="getMovieInfo('${title}')">
+                                <img src="${poster}" class="poster" alt="poster"></a>
+                            </div>
+                            <div class="movie-btm">
+                                <p>
+                                    <strong>${title}</strong>
+                                    <span><img src="./static/images/star.png">  ${score}</span>
+                                </p>
+                            </div>
+                         </div>`;
 
         $("#movie-list").append(movie_item);
       }
