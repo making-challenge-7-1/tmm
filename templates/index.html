@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div class="tabs is-toggle is-fullwidth is-large">
+<div class="tabs is-toggle is-fullwidth is-medium" style="margin:10px">
   <ul>
     <li>
       <a href="#movie-list"  onclick="getMovieList('신남')">
@@ -68,12 +68,5 @@
 <!-- custom script -->
     {% block javascript %} 
         <script src="./static/scripts/main.js"></script>
-
-        <script>
-          function getUser(){
-            let user = localStorage.getItem("username");
-            console.log(user);
-          }
-        </script>    
     {% endblock %}
 {% endblock %}
