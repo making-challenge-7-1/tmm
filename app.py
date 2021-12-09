@@ -5,15 +5,9 @@ import random
 
 app = Flask(__name__)
 
-# client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
-# db = client.dbsparta
-
-client = MongoClient("localhost", 27017)
-db = client.dbMovie
-
-movieList = db.tp7
-comment = db.comment
-
+# client = MongoClient("localhost", 27017)
+client = MongoClient("mongodb://test:test@54.180.140.177", 27017)
+db = client.dbMovies
 
 app.secret_key = "WFLIX"
 
@@ -103,29 +97,30 @@ def get_recommend_top():
     recommend_top = []
 
     try:
-        happy_list = list(movieList.find({"genre": "신남"}, {"_id": False}))
+        happy_list = list(db.movieList.find({"genre": "신남"}, {"_id": False}))
         today_happy = random.sample(happy_list, 1)[0]
+        print(today_happy)
 
         happy_title = today_happy["title"]
         happy_img = today_happy["img_url"]
         recommend_top.append(happy_title)
         recommend_top.append(happy_img)
 
-        angry_list = list(movieList.find({"genre": "화남"}, {"_id": False}))
+        angry_list = list(db.movieList.find({"genre": "화남"}, {"_id": False}))
         today_angry = random.sample(angry_list, 1)[0]
         angry_title = today_angry["title"]
         angry_img = today_angry["img_url"]
         recommend_top.append(angry_title)
         recommend_top.append(angry_img)
 
-        sad_list = list(movieList.find({"genre": "우울"}, {"_id": False}))
+        sad_list = list(db.movieList.find({"genre": "우울"}, {"_id": False}))
         today_sad = random.sample(sad_list, 1)[0]
         sad_title = today_sad["title"]
         sad_img = today_sad["img_url"]
         recommend_top.append(sad_title)
         recommend_top.append(sad_img)
 
-        move_list = list(movieList.find({"genre": "떠남"}, {"_id": False}))
+        move_list = list(db.movieList.find({"genre": "떠남"}, {"_id": False}))
         today_move = random.sample(move_list, 1)[0]
         move_title = today_move["title"]
         move_img = today_move["img_url"]
@@ -145,7 +140,9 @@ def get_recommend_list():
         genre_receive = request.form["genre_name"]
 
         movie_list = list(
-            movieList.find({"genre": genre_receive}, {"_id": False}).sort("score", -1)
+            db.movieList.find({"genre": genre_receive}, {"_id": False}).sort(
+                "score", -1
+            )
         )
 
     except Exception:
@@ -159,7 +156,7 @@ def get_recommend_list():
 @app.route("/find/all/score", methods=["GET"])
 def find_all_movie_score():
     try:
-        movie_list_all = list(movieList.find({}, {"_id": False}).sort("score", -1))
+        movie_list_all = list(db.movieList.find({}, {"_id": False}).sort("score", -1))
 
     except Exception:
 
@@ -171,7 +168,7 @@ def find_all_movie_score():
 @app.route("/find/all/abc", methods=["GET"])
 def find_all_movie_abc():
     try:
-        movie_list_all = list(movieList.find({}, {"_id": False}).sort("title", 1))
+        movie_list_all = list(db.movieList.find({}, {"_id": False}).sort("title", 1))
 
     except Exception:
 
@@ -185,9 +182,9 @@ def find_movie_by_title():
     try:
         title_receive = request.form["title_give"]
         movie_list_all = list(
-            movieList.find({"title": {"$regex": title_receive}}, {"_id": False}).sort(
-                "title", 1
-            )
+            db.movieList.find(
+                {"title": {"$regex": title_receive}}, {"_id": False}
+            ).sort("title", 1)
         )
 
     except Exception:
@@ -204,7 +201,7 @@ def find_movie_detail():
         title_receive = request.form["title_give"]
         # print(title_receive)
 
-        target = movieList.find_one({"title": title_receive}, {"_id": False})
+        target = db.movieList.find_one({"title": title_receive}, {"_id": False})
         # print(target)
 
     except Exception as e:
