@@ -62,16 +62,14 @@ function showMovieList(movieList) {
     let title = movieList[i]["title"];
 
     let movie_item = `<div class="column is-2 is-narrow movie-card">
-                              <div class="card">
-                                <div class="card-image">
-                                  <a href="/detail" onclick="getMovieInfo('${title}')">
-                                    <figure class="image card-mg">
-                                      <img src="${poster}" alt="${title}" style="width:160px">
-                                    </figure>
-                                  </a>
-                                </div>
+                            <a href="/detail" onclick="getMovieInfo('${title}')">
+                              <div class="movie-top">
+                                <figure class="image card-mg">
+                                  <img src="${poster}" alt="${title}" class="poster">
+                                </figure>
                               </div>
-                            </div>`;
+                            </a>
+                      </div>`;
 
     $("#movie-list-all").append(movie_item);
   }
