@@ -1,21 +1,51 @@
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
 body {
   color: black;
 }
 
-header {
-  width: 100%;
-  height: 100px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
+.boxPadding {
+  padding-left: 220px;
 }
-
-header h1 {
-  color: white;
-  font-weight: 900;
-  margin: 40px;
+.button-submit {
+  margin-top: 10px;
+}
+#review {
+	position: relative;
+	background: #66B2FF;
+	border-radius: .4em;
+    padding: 10px;
+}
+#review:after {
+	content: '';
+	position: absolute;
+	left: 5px;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-right-color: #66B2FF;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -10px;
+	margin-left: -20px;
+}
+a:hover {
+  text-decoration: none;
+}
+#movie-today {
+  margin: 20px;
+}
+#movie-today h2 {
+  font-size: 24px;
+}
+.title {
+  font-family: "Abril Fatface", cursive;
+  font-weight: 800;
+}
+.recommend-title {
+  width: 100%;
 }
 
 main {
@@ -23,24 +53,27 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
+  min-height: 100%;
 }
 
-footer {
-  display: flex;
-  height: 70px;
-  color: white;
-  background-color: black;
+.card-main {
   text-align: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  bottom: 0;
-  width: 100%;
+  margin: 20px;
+  padding: 10px;
 }
 
-footer h5 {
-  align-self: center;
+.card-title {
+  font-size: 1.2rem !important;
+}
+
+.movie-card {
+  width: fit-content !important;
+  box-shadow: none !important;
+}
+
+.card-mg {
+  margin: 0 !important;
 }
 
 .header-logo {
@@ -52,10 +85,20 @@ footer h5 {
   width: 100%;
   height: auto;
   text-align: center;
+  justify-content: center;
+  margin: 20px;
+}
+#movie-recommend-title {
+  margin: 20px;
+}
+
+.movie-recommend-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .movie-recommend-list {
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -66,16 +109,26 @@ footer h5 {
   text-align: center;
   display: flex;
   flex-direction: column;
-  margin: 30px auto;
+  margin: 10px;
 }
 
-.feeling h1 {
-  margin-bottom: 40px;
+.headline {
+  margin-bottom: 20px;
+}
+
+.headline h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.headline h4 {
+  color: grey;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   margin: 0 auto;
 }
 
@@ -87,27 +140,99 @@ footer h5 {
   border-radius: 30px;
 }
 
-#movie-list {
+.movie-card-head {
+  width: 200px;
+  margin: 20px;
+  align-items: center;
+}
+
+#movie-list,
+#movie-list-all {
   display: flex;
   flex-wrap: wrap;
-  background-color: bisque;
+
   justify-content: center;
-  margin: 0 50px;
-}
-
-.movie-card-head,
-.movie-card {
-  width: 160px;
-  height: 240px;
-  background-color: black;
-  margin: 50px;
-  background-image: url("http://img.movist.com/?img=/x00/05/39/50_p1.jpg");
-  background-size: cover;
-}
-
-.movie-card-head {
-  width: 120px;
-  height: 160px;
   margin: 20px;
-  background-image: url("http://img.movist.com/?img=/x00/05/39/50_p1.jpg");
 }
+
+#movie {
+  padding: 10px;
+}
+
+.infor h3 strong {
+  font-size: 15px;
+}
+
+.poster {
+  width: 82%;
+}
+
+.nav-item {
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+/* img:hover {
+  cursor: pointer;
+} */
+input:hover {
+  cursor: default;
+}
+
+#movie_detail {
+  width: 100%;
+}
+
+.content {
+  min-height: 100%;
+}
+
+.detail {
+  min-height: 100px;
+  margin-top: 15px;
+  padding: 15px;
+  margin: 20px;
+}
+
+.footer {
+  left: 0;
+  bottom: 0;
+  position: relative;
+}
+
+.box-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 18px;
+}
+
+.movie-top{
+  box-sizing: border-box;
+  border-radius: 30px;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+}
+
+.movie-top img{
+  box-sizing: border-box;
+  border-radius: 12px;
+  transition: all 0.2s linear;
+}
+
+.movie-top:hover img {
+  transform: scale(1.05);
+}
+
+.movie-btm {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.movie-btm span {
+  font-weight: bold;
+  font-size: 12px;
+}
+

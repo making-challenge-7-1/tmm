@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block main %}
+
+<div id="movie_detail" class="content is-medium"></div>
+
+<div
+  id="movie-comments"
+  class="content is-medium"
+  style="margin: 0 20%; padding: 20px; width: 100%"
+>
+  <div id="comment-title">
+    <h3>Comments</h3>
+  </div>
+
+  <div id="comment-list"></div>
+</div>
+
+<div
+  id="new-comment"
+  class="content is-medium"
+  style="margin: 0 20%; padding: 20px; width: 100%"
+>
+  <h3>New Comment</h3>
+  {% if session['username'] %}
+  <article class="media">
+    <figure class="media-left" style="margin: 1rem 2rem">
+      <p class="image is-64x64">
+        <i class="fas fa-user" style="font-size: 48px"></i>
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="field">
+        <p class="control">
+          <textarea
+            class="textarea"
+            placeholder="리뷰를 남겨보세요."
+            id="new-post"
+          ></textarea>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control">
+          <button class="button" onclick="add_comment()">리뷰 추가</button>
+          <button class="button" onclick="cancel_comment()">취소</button>
+        </p>
+      </div>
+    </div>
+  </article>
+  {% else %}
+  <div style="text-align: center">
+    <h3>로그인이 필요합니다.</h3>
+  </div>
+  {% endif %}
+</div>
+
+<!-- custom script -->
+{% block javascript %}
+<script src="./static/scripts/detail.js"></script>
+{% endblock %} {% endblock %}
