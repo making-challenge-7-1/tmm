@@ -55,16 +55,17 @@ function getMovieList(genre) {
         let score = movieList[i]["score"];
 
         let movie_item = `<div class="column is-one-quarter">
-                              <div class="card card-main">
-                                <a href="/detail" onclick="getMovieInfo('${title}')"><img src="${poster}" class="card-img poster" alt="poster"></a>
-                                <div class="card-body">
-                                  <p class="card-text">
-                                  <h3><strong>${title}</strong></h3>
-                                  <span>평점: ${score} 점</span>
-                                  </p>
-                                </div>
-                              </div>
-                            </div>`;
+                            <div class="movie-top">
+                                <a href="/detail" onclick="getMovieInfo('${title}')">
+                                <img src="${poster}" class="poster" alt="poster"></a>
+                            </div>
+                            <div class="movie-btm">
+                                <p>
+                                    <strong>${title}</strong>
+                                    <span><img src="./static/images/star.png">  ${score}</span>
+                                </p>
+                            </div>
+                         </div>`;
 
         $("#movie-list").append(movie_item);
       }
