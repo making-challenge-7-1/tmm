@@ -2,8 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 from pymongo import MongoClient
-client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
-db = client.dbsparta
+# client = MongoClient('mongodb://test:test@52.79.33.194', 27017)
+client = MongoClient("mongodb://test:test@localhost", 27017)
+db = client.dbMovies
 
 from datetime import timedelta, date
 
