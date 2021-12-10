@@ -12,24 +12,24 @@ body {
   margin-top: 10px;
 }
 #review {
-	position: relative;
-	background: #66B2FF;
-	border-radius: .4em;
-    padding: 10px;
+  position: relative;
+  background: #66b2ff;
+  border-radius: 0.4em;
+  padding: 10px;
 }
 #review:after {
-	content: '';
-	position: absolute;
-	left: 5px;
-	top: 50%;
-	width: 0;
-	height: 0;
-	border: 20px solid transparent;
-	border-right-color: #66B2FF;
-	border-left: 0;
-	border-top: 0;
-	margin-top: -10px;
-	margin-left: -20px;
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-right-color: #66b2ff;
+  border-left: 0;
+  border-top: 0;
+  margin-top: -10px;
+  margin-left: -20px;
 }
 a:hover {
   text-decoration: none;
@@ -92,13 +92,9 @@ main {
   margin: 20px;
 }
 
-.movie-recommend-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .movie-recommend-list {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -141,8 +137,7 @@ main {
 }
 
 .movie-card-head {
-  width: 200px;
-  margin: 20px;
+  padding: 10px;
   align-items: center;
 }
 
@@ -150,7 +145,6 @@ main {
 #movie-list-all {
   display: flex;
   flex-wrap: wrap;
-
   justify-content: center;
   margin: 20px;
 }
@@ -168,9 +162,6 @@ main {
   margin: 0 10px;
 }
 
-/* img:hover {
-  cursor: pointer;
-} */
 input:hover {
   cursor: default;
 }
@@ -208,7 +199,7 @@ input:hover {
   width: 82%;
 }
 
-.movie-top{
+.movie-top {
   box-sizing: border-box;
   border-radius: 30px;
   margin: auto;
@@ -216,7 +207,7 @@ input:hover {
   padding: 10px;
 }
 
-.movie-top img{
+.movie-top img {
   box-sizing: border-box;
   border-radius: 12px;
   transition: all 0.2s linear;
@@ -234,4 +225,20 @@ input:hover {
 .movie-btm span {
   font-weight: bold;
   font-size: 12px;
+}
+
+.navbar-item {
+  text-align: center;
+}
+
+#movie-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#movie-sort-buttons {
+  display: flex;
+  align-items: center;
+  margin: 20px 50px;
 }

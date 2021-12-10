@@ -23,7 +23,7 @@ function get_detail() {
       let url = movie_data["url"];
       let genre = movie_data["genre"];
 
-      let temp_html = `<div class="content detail">
+      let temp_html = `<div class="content detail is-mobile">
                             <input type="image" src="${poster}" width="202" height="290" style="float: left"/>
                             <div class="boxPadding">
                             <h1>${title}</h1>
