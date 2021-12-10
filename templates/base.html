@@ -55,11 +55,7 @@
 
   <body>
     <header>
-      <nav
-        class="navbar is-transparent"
-        role="navigation"
-        aria-label="main navigation"
-      >
+      <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
             <img src="./static/images/logo.png" width="122" />
@@ -67,7 +63,7 @@
 
           <a
             role="button"
-            class="navbar-burger is-active"
+            class="navbar-burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasic"
@@ -78,7 +74,7 @@
           </a>
         </div>
 
-        <div id="navbarBasic" class="navbar-menu is-active">
+        <div id="navbarBasic" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item" href="/"> Home </a>
             <a class="navbar-item" href="/movies"> Movies </a>
@@ -89,21 +85,27 @@
             <div class="navbar-item">
               <h2>{{session["username"]}} 님, 환영합니다.</h2>
             </div>
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-light" href="/logout"> Log out </a>
-              </div>
-            </div>
+            <a
+              class="navbar-item button is-link is-light"
+              href="/logout"
+              style="margin: 10px"
+            >
+              Log out
+            </a>
             {% else %}
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-link" href="/register">
-                  <strong>Sign up</strong>
-                </a>
-                <a class="button is-light" href="/login"> Log in </a>
-                {% endif %}
-              </div>
-            </div>
+            <a
+              class="navbar-item button is-link"
+              href="/register"
+              style="margin: 10px"
+              >Sign up {# <button class="level-item">Sign up</button> #}
+            </a>
+            <a
+              class="navbar-item button is-light"
+              href="/login"
+              style="margin: 10px"
+              >Log in</a
+            >
+            {% endif %}
           </div>
         </div>
       </nav>
@@ -123,5 +125,7 @@
         </p>
       </div>
     </footer>
+
+    <script src="./static/scripts/toggle.js"></script>
   </body>
 </html>

@@ -5,7 +5,6 @@ import random
 
 app = Flask(__name__)
 
-# client = MongoClient("localhost", 27017)
 client = MongoClient("mongodb://test:test@54.180.140.177", 27017)
 db = client.dbMovies
 
@@ -97,31 +96,73 @@ def get_recommend_top():
     recommend_top = []
 
     try:
-        happy_list = list(db.movieList.find({"genre": "신남"}, {"_id": False}))
-        today_happy = random.sample(happy_list, 1)[0]
-        print(today_happy)
+        happy_list = list(
+            db.movieList.find({"genre": "신남"}, {"_id": False}).sort("score", -1)
+        )
 
+        happy_recommend_list = []
+
+        for movie in happy_list:
+            score = movie["score"]
+            score = float(score)
+            if score > 8:
+                happy_recommend_list.append(movie)
+
+        today_happy = random.sample(happy_recommend_list, 1)[0]
         happy_title = today_happy["title"]
         happy_img = today_happy["img_url"]
         recommend_top.append(happy_title)
         recommend_top.append(happy_img)
 
-        angry_list = list(db.movieList.find({"genre": "화남"}, {"_id": False}))
-        today_angry = random.sample(angry_list, 1)[0]
+        angry_list = list(
+            db.movieList.find({"genre": "화남"}, {"_id": False}).sort("score", -1)
+        )
+
+        angry_recommend_list = []
+
+        for movie in angry_list:
+            score = movie["score"]
+            score = float(score)
+            if score > 8:
+                angry_recommend_list.append(movie)
+
+        today_angry = random.sample(angry_recommend_list, 1)[0]
         angry_title = today_angry["title"]
         angry_img = today_angry["img_url"]
         recommend_top.append(angry_title)
         recommend_top.append(angry_img)
 
-        sad_list = list(db.movieList.find({"genre": "우울"}, {"_id": False}))
-        today_sad = random.sample(sad_list, 1)[0]
+        sad_list = list(db.movieList.find({"genre": "우울"}, {"_id": False}).sort(
+                "score", -1
+            ))
+
+        sad_recommend_list = []
+
+        for movie in sad_list:
+            score = movie["score"]
+            score = float(score)
+            if score > 8:
+                sad_recommend_list.append(movie)
+
+        today_sad = random.sample(sad_recommend_list, 1)[0]
         sad_title = today_sad["title"]
         sad_img = today_sad["img_url"]
         recommend_top.append(sad_title)
         recommend_top.append(sad_img)
 
-        move_list = list(db.movieList.find({"genre": "떠남"}, {"_id": False}))
-        today_move = random.sample(move_list, 1)[0]
+        move_list = list(db.movieList.find({"genre": "떠남"}, {"_id": False}).sort(
+                "score", -1
+            ))
+
+        move_recommend_list = []
+
+        for movie in move_list:
+            score = movie["score"]
+            score = float(score)
+            if score > 8:
+                move_recommend_list.append(movie)
+
+        today_move = random.sample(move_recommend_list, 1)[0]
         move_title = today_move["title"]
         move_img = today_move["img_url"]
         recommend_top.append(move_title)
@@ -139,23 +180,23 @@ def get_recommend_list():
     try:
         genre_receive = request.form["genre_name"]
 
-        movie_list2 = list(
+        movie_list = list(
             db.movieList.find({"genre": genre_receive}, {"_id": False}).sort(
                 "score", -1
             )
         )
-        movie_list = []
-        for movie in movie_list2:
-            score = movie['score']
+        movie_list_sort = []
+        for movie in movie_list:
+            score = movie["score"]
             score = float(score)
             if score > 5:
-                movie_list.append(movie)
+                movie_list_sort.append(movie)
 
     except Exception:
 
         return jsonify({"error"})
 
-    return jsonify({"movie_list": movie_list})
+    return jsonify({"movie_list": movie_list_sort})
 
 
 # get all genre movie list
@@ -205,10 +246,7 @@ def find_movie_by_title():
 def find_movie_detail():
     try:
         title_receive = request.form["title_give"]
-        # print(title_receive)
-
         target = db.movieList.find_one({"title": title_receive}, {"_id": False})
-        # print(target)
 
     except Exception as e:
         return {"message": "failed to search"}, 401
