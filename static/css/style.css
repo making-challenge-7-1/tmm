@@ -92,13 +92,9 @@ main {
   margin: 20px;
 }
 
-.movie-recommend-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .movie-recommend-list {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -141,8 +137,7 @@ main {
 }
 
 .movie-card-head {
-  width: 200px;
-  margin: 20px;
+  padding: 10px;
   align-items: center;
 }
 
@@ -150,7 +145,6 @@ main {
 #movie-list-all {
   display: flex;
   flex-wrap: wrap;
-
   justify-content: center;
   margin: 20px;
 }

@@ -61,7 +61,7 @@ function showMovieList(movieList) {
     let poster = movieList[i]["img_url"];
     let title = movieList[i]["title"];
 
-    let movie_item = `<div class="column is-2 is-narrow movie-card">
+    let movie_item = `<div class="column is-2 is-mobile movie-card">
                             <a href="/detail" onclick="getMovieInfo('${title}')">
                               <div class="movie-top">
                                 <figure class="image card-mg">

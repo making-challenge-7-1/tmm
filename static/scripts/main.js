@@ -1,4 +1,5 @@
 $(document).ready(() => {
+
   getRecommendList();
 });
 
@@ -52,7 +53,7 @@ function getMovieList(genre) {
         let title = movieList[i]["title"];
         let score = movieList[i]["score"];
 
-        let movie_item = `<div class="column is-one-quarter">
+        let movie_item = `<div class="column is-one-quarter is-narrow-mobile">
                             <div class="movie-top">
                                 <a href="/detail" onclick="getMovieInfo('${title}')">
                                 <img src="${poster}" class="poster" alt="poster"></a>
