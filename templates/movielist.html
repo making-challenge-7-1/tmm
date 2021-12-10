@@ -4,7 +4,7 @@
   <h2>ALL Movies</h2>
 </div>
 
-<div id="movie-controls" style="display: flex; flex-wrap: wrap">
+<div id="movie-controls">
   <div id="search-movie" style="display: flex; align-items: center">
     <input
       id="search-movie-title"
@@ -20,10 +20,7 @@
       검색
     </button>
   </div>
-  <div
-    id="movie-sort-buttons"
-    style="display: flex; align-items: center; margin-left: 50px; float: right"
-  >
+  <div id="movie-sort-buttons">
     <button
       class="level-item button is-info is-light"
       style="margin: 0 10px"
@@ -42,7 +39,7 @@
   </div>
 </div>
 
-<div id="movie-list-all" class="columns"></div>
+<div id="movie-list-all" class="columns is-mobile"></div>
 
 <!-- custom script -->
 {% block javascript %}

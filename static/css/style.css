@@ -162,9 +162,6 @@ main {
   margin: 0 10px;
 }
 
-/* img:hover {
-  cursor: pointer;
-} */
 input:hover {
   cursor: default;
 }
@@ -232,4 +229,16 @@ input:hover {
 
 .navbar-item {
   text-align: center;
+}
+
+#movie-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#movie-sort-buttons {
+  display: flex;
+  align-items: center;
+  margin: 20px 50px;
 }
